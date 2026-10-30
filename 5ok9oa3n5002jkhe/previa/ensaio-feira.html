@@ -1,0 +1,85 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Ensaio da Feira de Ciências (esboço)</title>
+<style>
+body{font-family:system-ui,sans-serif;font-size:22px;margin:0;background:#f6f3ea;color:#222}
+main{max-width:640px;margin:auto;padding:16px 16px 60vh}.v{font-style:italic;text-align:center;color:#555;font-size:18px}
+h1{font-size:30px;text-align:center;margin:8px 0}h2{font-size:28px;color:#1d4e89;margin:6px 0}
+.card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px #0002;margin:16px 0;border:4px solid transparent}
+.card.atual{border-color:#ffb300}.card.ok{background:#eaf7ea}
+.card.lock{opacity:.35;filter:grayscale(1);background:#eee}.card.lock>*:not(.trava){pointer-events:none}
+.trava{display:none;text-align:center;font-weight:bold;color:#8a1c1c;background:#fde2e2;border-radius:10px;padding:8px}.card.lock .trava{display:block}
+.inst{background:#fff7d6;border-radius:12px;padding:10px 12px;margin-bottom:10px;font-size:20px}
+button{font-size:22px;padding:14px;border-radius:12px;border:0;margin:6px 0;width:100%}
+.bn{background:#1d4e89;color:#fff}.bl{background:#7e57c2;color:#fff;font-weight:bold}.bg{background:#4caf50;color:#fff;font-weight:bold}
+.txt{background:#eef4fb;border-radius:10px;padding:10px;font-size:20px;line-height:1.5;margin:8px 0}
+.cartao{border:2px dashed #1d4e89;border-radius:12px;padding:10px;margin:10px 0}.resp{display:none;background:#eaf7ea;border-radius:8px;padding:8px;margin-top:6px}.cartao.ver .resp{display:block}
+label{display:flex;gap:12px;align-items:center;font-size:22px;margin-top:10px}input[type=checkbox]{width:34px;height:34px;flex:none}
+textarea,input[type=text]{width:100%;box-sizing:border-box;font-size:20px;padding:8px;border-radius:8px;border:1px solid #aaa}
+#barra{position:sticky;top:0;background:#1d4e89;color:#fff;text-align:center;padding:8px;font-size:19px;z-index:2}
+.cr{font-size:44px;text-align:center;font-weight:bold;color:#1d4e89}.min{float:right;font-size:16px;color:#666}
+.pai{background:#fde2e2;border-radius:10px;padding:8px;font-size:17px}.hide{display:none}
+#aviso30{position:sticky;top:42px;z-index:2;background:#c0392b;color:#fff;text-align:center;padding:10px;font-weight:700}
+</style></head><body>
+<div id="barra">Blocos feitos: <b id="cont">0</b> de 7 · ⏱ <b id="crono">30:00</b></div>
+<div id="aviso30" class="hide">⏰ Acabou a meia hora. Pare onde está e chame o papai.</div>
+<main>
+<p class="v">“Quer comais, quer bebais ou façais outra coisa qualquer, fazei tudo para a glória de Deus.” 1Co 10.31</p>
+<h1>Ensaio da Feira de Ciências: a rampa e a energia</h1>
+<p class="pai">ESBOÇO para o papai aprovar. Nada publicado.</p>
+<div class="card atual" id="cstart"><div class="inst"><b>O que fazer:</b> você tem 30 minutos para ensaiar a sua apresentação de amanhã. Deixe a rampa, a bolinha, os 3 livros, a trena e a placa perto de você. Aperte Começar e faça um bloco de cada vez, de cima para baixo.</div>
+<button class="bn" id="go">Começar</button></div>
+<div id="blocos"></div>
+<div class="card hide" id="fim"><h2>🎉 Ensaio terminado!</h2><div class="txt" id="fimtxt"></div>
+<p class="pai">Sugestão (opcional, o papai decide): se terminar antes dos 30 minutos, abrir aqui o jogo "Ache no mapa", como na revisão.</p></div>
+</main>
+<script>
+const R={ab:'Olá! Meu nome é [seu nome]. Meu experimento é a rampa e a energia.',
+dem:'Eu solto a bolinha com a rampa em 1 livro e depois em 3 livros, e respondo às 5 perguntas do verso da placa.',
+ver:'“No princípio, criou Deus os céus e a terra.” (Gênesis 1.1). A bolinha sempre obedece às mesmas regras, porque Deus criou um mundo em ordem e o sustenta todos os dias. Quando eu estudo a energia, aprendo a admirar o Criador.',
+enc:'Obrigada!'};
+const P=[['O que é energia?','É o que faz as coisas se moverem.'],
+['Por que a bolinha rola sozinha quando eu solto?','Ela estava lá no alto; a energia estava guardada na altura.'],
+['O que acontece quando a rampa fica mais alta?','A bolinha vai mais longe.'],
+['Por que, no fim, a bolinha para?','O chão vai segurando (atrito) e a energia acaba.'],
+['O que isso me ensina sobre Deus?','Deus fez o mundo com ordem e sustenta tudo (Gn 1.1; Hb 1.3).']];
+const cart=(l)=>l.map(([q,a])=>`<div class="cartao"><b>${q}</b><button class="bl" onclick="this.parentNode.classList.toggle('ver')">Mostrar / esconder</button><div class="resp">${a}</div></div>`).join('');
+const cron=(id,s)=>`<div class="cr" id="t${id}">0:00</div><button class="bn" onclick="crTog('${id}',${s||0})">▶ Iniciar / parar cronômetro</button>`;
+const B=[
+{t:'1. Ouvir e ler o roteiro',m:3,i:'Aperte Ouvir. Leia junto o roteiro inteiro, com calma. Depois marque o quadradinho.',c:`<button class="bg" onclick="fala(roteiro())">🔊 Ouvir o roteiro</button><div class="txt"><b>Abertura (15 s):</b> ${R.ab}<br><b>Demonstração (2 min):</b> ${R.dem}<br><b>Versículo e reflexão (30 s):</b> ${R.ver}<br><b>Encerramento (15 s):</b> ${R.enc}</div>`,f:'Li e ouvi o roteiro inteiro'},
+{t:'2. Memorizar as 5 perguntas',m:6,i:'Leia a pergunta e tente dizer a resposta em voz alta, sem olhar. Depois toque em Mostrar para conferir. Faça as 5 perguntas duas vezes.',c:cart(P),f:'Acertei as 5 respostas sem olhar'},
+{t:'3. Ensaiar cada parte',m:6,i:'Ensaie cada parte em voz alta, sem olhar o texto. Use o cronômetro. Toque em Mostrar só se esquecer. Marque cada parte que você falou sem olhar.',c:cart([['Abertura (meta: 15 segundos)',R.ab],['Versículo e reflexão (meta: 30 segundos)',R.ver],['Encerramento (meta: 15 segundos)',R.enc]])+cron('p')+`<label><input type="checkbox" class="sub">Abertura sem olhar</label><label><input type="checkbox" class="sub">Versículo e reflexão sem olhar</label><label><input type="checkbox" class="sub">Encerramento sem olhar</label>`,f:'Falei as 3 partes sem olhar'},
+{t:'4. Ensaiar a demonstração da rampa',m:4,i:'Monte a rampa: papelão em cima de 1 livro. Solte a bolinha sem empurrar e fale o que está acontecendo. Depois coloque 3 livros e solte de novo. Escreva a distância de cada vez.',c:`<div class="txt">${R.dem}</div>${cron('d')}<label>1 livro (cm): <input type="text" id="d1"></label><label>3 livros (cm): <input type="text" id="d3"></label><p class="pai">Papai: conferir com os números da tabela de 27/10 que estão na placa.</p>`,f:'Fiz a demonstração falando'},
+{t:'5. Perguntas surpresa',m:3,i:'Imagine que uma pessoa da feira faz a pergunta. Aperte Sortear, responda em voz alta e depois toque em Mostrar para conferir. Faça 3 vezes.',c:`<button class="bn" onclick="sorteia()">🎲 Sortear pergunta</button><div id="surp"></div>`,f:'Respondi 3 perguntas surpresa'},
+{t:'6. Ensaio completo',m:5,i:'Agora apresente tudo do começo ao fim, com a rampa, como se fosse amanhã. Aperte o cronômetro ao começar e pare ao dizer Obrigada. A meta é 3 minutos ou menos. Escreva o seu tempo.',c:cron('e',180)+`<label>Meu tempo: <input type="text" id="tempo"></label>`,f:'Fiz o ensaio completo'},
+{t:'7. Como foi?',m:3,i:'Marque o que você conseguiu e escreva 1 coisa para melhorar amanhã.',c:`<label><input type="checkbox" class="sub">Falei com voz alta e clara</label><label><input type="checkbox" class="sub">Olhei para quem escuta</label><label><input type="checkbox" class="sub">Expliquei o resultado: quanto mais alta a rampa, mais longe a bolinha vai</label><label><input type="checkbox" class="sub">Fiquei em 3 minutos ou menos</label><textarea id="melhorar" rows="3" placeholder="Uma coisa para melhorar"></textarea>`,f:'Terminei a autoavaliação'}];
+const K='ensFeira1',S=JSON.parse(localStorage.getItem(K)||'{}');S.ok=S.ok||[];const sv=()=>localStorage.setItem(K,JSON.stringify(S));
+var PTV=null;function achaVoz(){var s=window.speechSynthesis;if(!s)return null;var vs=s.getVoices()||[],pr=/Brasil|Brazil|Luciana|Google portugu[eê]s do Brasil|Francisca|Felipe/i;var pb=vs.filter(function(v){return /^pt[-_]BR/i.test(v.lang)});PTV=pb.filter(function(v){return pr.test(v.name)})[0]||pb[0]||vs.filter(function(v){return /^pt/i.test(v.lang)})[0]||null;if(vs.length)avisoVoz(!PTV);return PTV}
+function avisoVoz(on){var d=document.getElementById('avisoVoz');if(!on){if(d)d.remove();return}if(d||!document.body)return;d=document.createElement('div');d.id='avisoVoz';d.setAttribute('role','alert');d.style.cssText='position:fixed;left:8px;right:8px;bottom:8px;z-index:99;background:#fff3cd;color:#7a4b00;border:2px solid #f0a500;border-radius:12px;padding:12px;font:bold 17px system-ui,sans-serif;text-align:center';d.textContent='O celular não tem voz em português. Peça ao papai para instalar a voz Português (Brasil) nas configurações de fala.';document.body.appendChild(d)}
+function vozPT(u){var v=PTV||achaVoz();if(v){u.voice=v;u.lang=v.lang.replace('_','-')}else u.lang='pt-BR';return u}
+if(window.speechSynthesis){achaVoz();try{speechSynthesis.addEventListener('voiceschanged',achaVoz)}catch(e){speechSynthesis.onvoiceschanged=achaVoz}setTimeout(achaVoz,1500)}
+function fala(t){try{speechSynthesis.cancel();const u=vozPT(new SpeechSynthesisUtterance(t));u.rate=.95;speechSynthesis.speak(u)}catch(e){}}
+function roteiro(){return [R.ab,R.dem,R.ver,R.enc].join(' ')}
+const T={};function crTog(id,meta){const el=document.getElementById('t'+id);if(T[id]){clearInterval(T[id].h);T[id]=null;return}const s=Date.now();T[id]={h:setInterval(()=>{const x=Math.floor((Date.now()-s)/1000);el.textContent=Math.floor(x/60)+':'+String(x%60).padStart(2,'0');el.style.color=meta&&x>meta?'#c0392b':''},250)}}
+function sorteia(){const p=P[Math.floor(Math.random()*P.length)];document.getElementById('surp').innerHTML=cart([p]);fala(p[0])}
+const W=document.getElementById('blocos');
+B.forEach((b,k)=>{const d=document.createElement('div');d.className='card lock';d.id='b'+k;
+d.innerHTML=`<div class="trava">🔒 Termine o bloco de cima primeiro</div><h2>${b.t}<span class="min">~${b.m} min</span></h2><div class="inst"><b>O que fazer:</b> ${b.i} <button class="bg" style="width:auto;padding:6px 12px;font-size:18px" onclick="fala(this.parentNode.innerText.replace('🔊',''))">🔊</button></div>${b.c}<label style="border-top:1px solid #ddd;padding-top:10px"><input type="checkbox" class="fim">${b.f}</label>`;
+W.appendChild(d);d.querySelector('.fim').onchange=e=>{if(e.target.checked&&!S.ok.includes(k))S.ok.push(k);if(!e.target.checked)S.ok=S.ok.filter(x=>x!==k);sv();upd()}});
+document.querySelectorAll('input[type=text],textarea').forEach(el=>{el.value=S[el.id]||'';el.oninput=()=>{S[el.id]=el.value;sv()}});
+function upd(){const st=!!S.ini;document.getElementById('cstart').className='card '+(st?'ok':'atual');let livre=st;
+B.forEach((b,k)=>{const d=document.getElementById('b'+k),ok=S.ok.includes(k);d.querySelector('.fim').checked=ok;d.className='card '+(!livre?'lock':ok?'ok':'atual');if(!ok)livre=false});
+document.getElementById('cont').textContent=S.ok.length;const tudo=S.ok.length==B.length;
+if(tudo&&!S.fimT){S.fimT=Date.now();sv()}document.getElementById('fim').classList.toggle('hide',!tudo);
+if(tudo){const m=Math.round((S.fimT-S.ini)/60000);document.getElementById('fimtxt').textContent=`Você ensaiou tudo em ${m} minutos. Tempo do ensaio completo: ${S.tempo||'—'}. Para melhorar: ${S.melhorar||'—'}. Glória a Deus!`}}
+document.getElementById('go').onclick=()=>{if(!S.ini){S.ini=Date.now();sv()}upd();fala('Vamos começar. Faça o bloco 1.');document.getElementById('b0').scrollIntoView({behavior:'smooth'})};
+setInterval(()=>{if(!S.ini)return;const r=Math.max(0,1800-Math.floor(((S.fimT||Date.now())-S.ini)/1000));document.getElementById('crono').textContent=Math.floor(r/60)+':'+String(r%60).padStart(2,'0');document.getElementById('aviso30').classList.toggle('hide',r>0||!!S.fimT)},500);
+upd();
+</script><style>.trv{opacity:.45;pointer-events:none}.dica0{text-align:center;color:#c0392b;font-weight:bold;margin:6px 0}</style>
+<script>(function(){function st(){try{return !!(S.ini)}catch(e){return true}}
+function livre(e){var g=document.getElementById('go');var c=g&&g.closest('.card');return (c&&c.contains(e))||/Recome/.test(e.textContent||'')}
+function lk(){var s=st(),g=document.getElementById('go');if(g){var h=document.getElementById('dica0');if(!h){h=document.createElement('p');h.id='dica0';h.className='dica0';h.textContent='🔒 Aperte Começar para liberar';g.insertAdjacentElement('afterend',h)}h.style.display=s?'none':''}
+document.querySelectorAll('input,textarea,button,select,label').forEach(function(e){if(livre(e))return;if(!s){if(e.tagName!='LABEL'&&!e.disabled){e.disabled=true;e.dataset.lk=1}e.classList.add('trv')}else{if(e.dataset.lk){e.disabled=false;delete e.dataset.lk}e.classList.remove('trv')}})}
+function bar(ev){if(st())return;var e=ev.target;if(!e.closest)return;var c=e.closest('input,textarea,button,select,label,audio');if(c&&!livre(c)){ev.preventDefault();ev.stopImmediatePropagation()}}
+['click','input','change','keydown','beforeinput','play'].forEach(function(t){document.addEventListener(t,bar,true)});
+document.addEventListener('click',function(){setTimeout(lk,30)});lk();setInterval(lk,500)})()</script>
+</body></html>
