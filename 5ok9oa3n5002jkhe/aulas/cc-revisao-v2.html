@@ -225,4 +225,26 @@ document.querySelectorAll('input,textarea,button,select,label').forEach(function
 function bar(ev){if(st())return;var e=ev.target;if(!e.closest)return;var c=e.closest('input,textarea,button,select,label,audio');if(c&&!livre(c)){ev.preventDefault();ev.stopImmediatePropagation()}}
 ['click','input','change','keydown','beforeinput','play'].forEach(function(t){document.addEventListener(t,bar,true)});
 document.addEventListener('click',function(){setTimeout(lk,30)});lk();setInterval(lk,500)})()</script>
-</body></html>
+<script>/* Trava do "Feito" de cada semana (30/10): só libera depois de tocar a MÚSICA daquela semana (>=60% ou até o fim; sem música: o áudio 🔊), abrir "Mostrar nomes" (Geografia) e tocar na perguntinha fácil. */
+(function(){
+var FIG={"Matemática":"🔢","Latim":"🏛️","Ciências":"🔬","Português":"📖","Linha do Tempo":"⏳","História":"📜","Geografia":"🌎"};
+var st=document.createElement("style");st.textContent=".pgq{background:#fff;border:3px solid #e57373;border-radius:12px;padding:8px;margin-top:8px}.pgq p{font-weight:bold;text-align:center;margin:4px}.pgq button{background:#fff3e0;color:#222;border:3px solid #ffb300;font-size:24px;font-weight:bold}.pgq button.ok{background:#c8f7c5;border-color:#4caf50}.pgq button.no{background:#fde2e2;border-color:#e57373}label.trv0{color:#888}";document.head.appendChild(st);
+var cur=null;function cardOf(el){return el&&el.closest&&el.closest(".card")}
+function keyOf(c){var i=c&&c.querySelector('input[type=checkbox][id^="s"]');return i?i.id.slice(1):null}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("button");if(!b)return;var c=cardOf(b),k=keyOf(c);if(!k)return;cur={k:k,mus:b.classList.contains("bg")};if(b.classList.contains("gnm")||b.classList.contains("xbtn")){s("gn"+k,"1");gate()}},true);
+var _p=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){var a=this,c=cur;if(c&&!a.__cc){a.__cc=1;var f=function(){if(a.ended||(a.duration&&a.currentTime/a.duration>=.6)){s((c.mus?"pm":"pa")+c.k,"1");gate()}};a.addEventListener("timeupdate",f);a.addEventListener("ended",f)}return _p.apply(this,arguments)};
+function mat(c){var h=c.querySelector("h2");return h?h.textContent.split(",")[0].trim():""}
+function liberado(c,k){var temMus=!!c.querySelector(".bg[data-m]");var ok=temMus?g("pm"+k)=="1":(g("pa"+k)=="1"||g("pm"+k)=="1");if(c.querySelector(".gnm,.xbtn")&&g("gn"+k)!="1")ok=false;return ok}
+function perg(c,k){if(c.querySelector(".pgq"))return;var m=mat(c);if(!FIG[m])return;var out=Object.keys(FIG).filter(function(x){return x!=m});var o2=out[Math.floor(Math.random()*out.length)];var ops=[m,o2].sort(function(){return Math.random()-.5});
+ var d=document.createElement("div");d.className="pgq";d.innerHTML="<p>👀 Toque: qual matéria é esta?</p>";ops.forEach(function(o){var b=document.createElement("button");b.type="button";b.textContent=FIG[o]+" "+o;if(o==m&&g("pg"+k)=="1")b.classList.add("ok");b.onclick=function(e){e.stopPropagation();s("pt"+k,String(+(g("pt"+k)||0)+1));if(o==m){s("pg"+k,"1");b.classList.add("ok")}else b.classList.add("no");gate()};d.appendChild(b)});
+ var lb=c.querySelector('input[type=checkbox][id^="s"]').closest("label");lb.before(d)}
+function gate(){document.querySelectorAll(".card").forEach(function(c){var k=keyOf(c);if(!k)return;perg(c,k);var i=$("s"+k),lb=i.closest("label"),L=liberado(c,k),P=g("pg"+k)=="1",ok=L&&P;
+ if(!ok){if(i.checked||g("s"+k)=="1"){i.checked=false;s("s"+k,"0")}i.disabled=true}else i.disabled=c.classList.contains("lock");
+ lb.classList.toggle("trv0",!ok);var sp=lb.querySelector(".ftx");if(!sp){sp=document.createElement("span");sp.className="ftx";if(lb.lastChild.nodeType==3)lb.lastChild.textContent="";lb.appendChild(sp)}
+ sp.textContent=ok?" ✅ Feito":(!L?(c.querySelector(".gnm,.xbtn")&&g("pm"+k)=="1"?" 🔒 Abra \"Mostrar nomes\" para liberar":" 🔒 Toque a música para liberar"):" 🔒 Responda a perguntinha 👀 para liberar");
+ if(ok&&i.checked&&!g("env"+k)){s("env"+k,"1");try{parent.postMessage({ccfeito:k,motivo:"musica"},"*")}catch(e){}}})}
+document.addEventListener("change",function(e){var i=e.target;if(i.type=="checkbox"&&/^s/.test(i.id)){var c=cardOf(i),k=i.id.slice(1);if(!(liberado(c,k)&&g("pg"+k)=="1")){i.checked=false;s("s"+k,"0")}setTimeout(gate,0)}},true);
+var _u=upd;upd=function(r){_u(r);gate()};document.addEventListener("visibilitychange",gate);window.addEventListener("pageshow",gate);window.addEventListener("storage",gate);
+gate();setInterval(gate,1000);
+})();
+</script></body></html>
