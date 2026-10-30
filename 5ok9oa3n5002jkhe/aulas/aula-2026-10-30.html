@@ -360,6 +360,7 @@ function karaoke(){var box=el.querySelector('.g3b'),P=pool().filter(function(s){
 var fbbox=el.querySelector('.g4b');jogoFb(fbbox,'canto-jogos','jogos de canto');
 window.RESX.push(function(H,KV){var c=S.canto||{};KV.push('CANTO=ESTRELAS='+est()+'|ADIVINHE='+(c.ad!=null?c.ad:'-')+'/6|RITMO='+(c.rt!=null?c.rt+'/'+(c.rr||15):'-')+'|KARAOKE='+(c.ka?c.ka+' auto='+(c.kself||0)+' mic='+(c.kmic||0):'-'));
  H.push('Canto (jogos): '+est()+' estrelas; adivinhe '+(c.ad!=null?c.ad:'-')+'/6; ritmo '+(c.rt!=null?c.rt:'-')+'; karaokê '+(c.ka||'não fez'))});
+try{resumo()}catch(e){}
 })();
 </script>
 </body></html>
