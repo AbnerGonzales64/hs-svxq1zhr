@@ -30,6 +30,11 @@ textarea,input[type=text]{box-sizing:border-box;font-size:20px;padding:8px;borde
 <div class="card tempo" style="text-align:center;background:#eef4fb"><b style="font-size:24px;color:#1d4e89">⏱ Tempo planejado de hoje: 4h00</b><br><span style="font-size:18px">3h30 de blocos de estudo + 0h30 de devocional/rotina · opcionais: +0h30</span></div><div class="card rotc"><h2>Antes das aulas (papai marca)</h2><label><input type="checkbox" data-c="rot0"> <span>08:00–08:30 Devocional em família</span></label></div>
 <div class="inst"><b>Como funciona:</b> são 8 blocos. Cada bloco tem 25 minutos de estudo e 5 minutos de pausa. Faça um bloco de cada vez, de cima para baixo. Em cada bloco: primeiro APRENDER, depois PRATICAR. No começo aperte "Começar cronômetro". Quando terminar, aperte "Parar cronômetro": a pausa começa sozinha. O que for escrito, escreva no papel e mande a foto. Se não quiser pausa, aperte "Pular pausa".<button class="ouv" onclick="falaEl(this)">🔊</button></div>
 <div class="card atual" id="cstart"><button class="bn" id="go">Começar</button></div>
+<div class="card" id="tela" style="border-color:#8e24aa"><h2>🎮🎨 Tempo livre no tablet</h2>
+<div class="inst">Jogo e desenho livre no tablet: no máximo <b>1 hora por dia</b>, somando tudo (os joguinhos da pausa também contam). Antes de jogar ou desenhar fora da página, aperte "Começar". Quando parar, aperte "Parar".</div>
+<p id="telaTxt" style="font-size:22px;font-weight:bold;color:#1d4e89;text-align:center">Usado hoje: 0:00 de 60:00</p>
+<button class="bl" id="telaGo">▶ Começar tempo livre (jogo/desenho)</button></div>
+
 <div id="blocos"></div>
 <div class="card hide" id="fim"><h2>🎉 Terminou as aulas de hoje!</h2>
 <div class="inst"><b>Papai:</b> confira o "Pai conferiu" de cada bloco, escreva a nota (opcional) e aperte o botão verde. O e-mail abre pronto: só aperte Enviar.<button class="ouv" onclick="falaEl(this)">🔊</button></div>
@@ -91,7 +96,7 @@ ${b.k||""}<div class="pai"><label><input type="checkbox" data-c="pai${k}"> Pai c
 W.appendChild(d);if(b.op){const so=v=>{S.t['op'+k]=v;sv();upd()};d.querySelector('.opsim').onclick=()=>so('sim');d.querySelector('.opnao').onclick=()=>so('nao');d.querySelector('.opvolta').onclick=()=>so('')}
 d.querySelector('.cini').onclick=()=>{if(!S.t['i'+k]){S.t['i'+k]=Date.now();sv();fala('Cronômetro começou. Bom estudo!')}upd()};
 d.querySelector('.fimb').onclick=()=>fimBloco(k,false);d.querySelector('.sf').onclick=()=>{S.t['nf'+k]=1;sv();if(S.t['wf'+k])iniPausa(k)};
-d.querySelector('.jg').onclick=()=>memoria(d.querySelector('.jogo'));d.querySelector('.pk').onclick=()=>{fecha(d);pula(k)};const pula=()=>{const p=S.t['p'+k];if(p&&!S.t['sk'+k]&&!S.t['pf'+k]){const g=Math.max(0,(S.t['L'+k]||300)-Math.floor((Date.now()-p)/1000));S.t['gu'+k]=g;S.bank=(S.bank||0)+g}S.t['sk'+k]=1;S.t['pf'+k]=1;sv();upd();const nx=document.getElementById('b'+(k+1));if(nx)nx.scrollIntoView({behavior:'smooth'})}});
+d.querySelector('.jg').onclick=()=>memoria(d.querySelector('.jogo'));d.querySelector('.pk').onclick=()=>{fecha(d);pula(k)};const pula=()=>{const p=S.t['p'+k];if(p&&!S.t['sk'+k]&&!S.t['pf'+k]){const g=Math.max(0,(S.t['L'+k]||300)-Math.floor((Date.now()-p)/1000));const g2=Math.min(g,Math.max(0,3600-(S.bank||0)));S.t['gu'+k]=g2;S.bank=Math.min(3600,(S.bank||0)+g2)}S.t['sk'+k]=1;S.t['pf'+k]=1;sv();upd();const nx=document.getElementById('b'+(k+1));if(nx)nx.scrollIntoView({behavior:'smooth'})}});
 document.querySelectorAll('[data-f]').forEach(el=>{el.value=S.f[el.dataset.f]||'';el.oninput=()=>{S.f[el.dataset.f]=el.value;sv()}});
 
 const ES={"0": ["f0"], "4": ["f4"], "5": ["f5"]};
@@ -134,7 +139,7 @@ function anda(){if(!vivo||!el.isConnected||!el.contains(ceu))return;bs.forEach(b
 rodada();requestAnimationFrame(anda)}
 const mmss=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
 function upd(){const st=!!S.ini;document.getElementById('cstart').className='card '+(st?'ok':'atual');let livre=st,cnt=0;const obrigOk=st&&B.every((b,k)=>b.op||(S.t['f'+k]&&S.t['p'+k]&&(S.t['sk'+k]||Date.now()-S.t['p'+k]>=(S.t['L'+k]||300)*1000)));
-B.forEach((b,k)=>{const d=document.getElementById('b'+k),f=!!S.t['f'+k],p=S.t['p'+k],pOk=p&&(S.t['sk'+k]||Date.now()-p>=(S.t['L'+k]||300)*1000);d.querySelector('.pausa').classList.toggle('on',!!(f&&p&&!pOk));{const sb=S.t['sob'+k]||0,bk=S.t['bk'+k]||0;d.querySelector('.ext').textContent=p&&(sb||bk)?'Pausa de 5:00'+(sb?' + '+mmss(sb)+' que sobrou do bloco':'')+(bk?' + '+mmss(bk)+' guardados':'')+' = '+mmss(S.t['L'+k]):''}trava(d,k);{const pb=d.querySelector('.pk');pb.textContent=(S.bank||0)>0&&k<B.length-1?'⏭ Pular pausa (guardar o tempo; já tem '+mmss(S.bank)+')':'⏭ Pular pausa (guardar o tempo)';}{const ci=d.querySelector('.cini'),fb=d.querySelector('.fimb');ci.disabled=!livre||!!S.t['i'+k];ci.textContent=S.t['i'+k]?'⏱ Cronômetro ligado':'▶ Começar cronômetro';fb.disabled=!S.t['i'+k]||f;fb.textContent=f?(S.t['auto'+k]?'⏰ Tempo acabou (25:00)':'✔ Cronômetro parado'):'■ Parar cronômetro (terminei o bloco)'}
+B.forEach((b,k)=>{const d=document.getElementById('b'+k),f=!!S.t['f'+k],p=S.t['p'+k],pOk=p&&(S.t['sk'+k]||Date.now()-p>=(S.t['L'+k]||300)*1000);d.querySelector('.pausa').classList.toggle('on',!!(f&&p&&!pOk));{const sb=S.t['sob'+k]||0,bk=S.t['bk'+k]||0;d.querySelector('.ext').textContent=p&&(sb||bk)?'Pausa de 5:00'+(sb?' + '+mmss(sb)+' que sobrou do bloco':'')+(bk?' + '+mmss(bk)+' de pausa guardada (máx. 60 min)':'')+' = '+mmss(S.t['L'+k]):''}trava(d,k);{const pb=d.querySelector('.pk');pb.textContent=(S.bank||0)>0&&k<B.length-1?'⏭ Pular pausa (guardar o tempo) · Pausa guardada: '+mmss(S.bank)+' (máx. 60 min)'+(S.bank>=3600?' — já está no máximo':''):'⏭ Pular pausa (guardar o tempo, máx. 60 min)';}{const ci=d.querySelector('.cini'),fb=d.querySelector('.fimb');ci.disabled=!livre||!!S.t['i'+k];ci.textContent=S.t['i'+k]?'⏱ Cronômetro ligado':'▶ Começar cronômetro';fb.disabled=!S.t['i'+k]||f;fb.textContent=f?(S.t['auto'+k]?'⏰ Tempo acabou (25:00)':'✔ Cronômetro parado'):'■ Parar cronômetro (terminei o bloco)'}
 if(b.op){const oc=S.t['op'+k]||'',lv=obrigOk&&oc=='sim';{const ci=d.querySelector('.cini');ci.disabled=!lv||!!S.t['i'+k]}d.querySelector('.opsim').classList.toggle('hide',!!oc);d.querySelector('.opnao').classList.toggle('hide',!!oc);d.querySelector('.oppul').classList.toggle('hide',oc!='nao');d.className='card '+(d.dataset.pt?'pt ':'')+(!obrigOk?'lock':oc=='nao'?'ok pul esc':oc==''?'atual esc':(f&&pOk)?'ok':'atual');if(f)cnt++;return}
 d.className='card '+(d.dataset.pt?'pt ':'')+(!livre?'lock':(f&&pOk)?'ok':'atual');if(f)cnt++;if(!(f&&pOk))livre=false});
 document.getElementById('cont').textContent=cnt;const tudo=B.every((b,k)=>S.t['f'+k]||(b.op&&S.t['op'+k]=='nao'));document.getElementById('fim').classList.toggle('hide',!tudo);if(tudo)resumo()}
@@ -173,7 +178,7 @@ if(ft)KV.push('FOTO='+b.id+'|BLOCO='+(k+1)+'|ENVIADA='+ft);
 KV.push('PAI='+b.id+'|CONFERIU='+pai);
 (b.pk||[]).forEach(p=>{const ok=!!C[p.c];H.push('  '+(ok?'[x] ':'[ ] ')+(p.kid=='pequena'?'Pequena':'Pequeno')+': '+p.t);KV.push('PQ='+p.kid+'|BLOCO='+b.id+'|ATIV='+cl(p.t)+'|QUEM=com o pai|FEITO='+(ok?'sim':'não'))});KVR[k].push(KV.length)});
 let gu=0,us=0;B.forEach((b,k)=>{gu+=S.t['gu'+k]||0;us+=S.t['bk'+k]||0});const PZ='PAUSAS: guardado ao pular '+mmss(gu)+', usado em pausas maiores '+mmss(us)+', sobrou no fim '+mmss(S.bank||0);H.push(PZ);
-KV.push('PAUSAS='+mmss(gu)+'|USADO='+mmss(us)+'|SOBROU='+mmss(S.bank||0));
+KV.push('PAUSAS='+mmss(gu)+'|USADO='+mmss(us)+'|SOBROU='+mmss(S.bank||0));H.push('TEMPO LIVRE NO TABLET (jogo e desenho): '+mmss(Math.floor(S.tl||0))+' de 60:00'+((S.tl||0)>=3600?' (chegou no limite)':''));KV.push('TELALIVRE='+mmss(Math.floor(S.tl||0))+'|MAX=60:00');
 const PK=B.flatMap(b=>b.pk||[]),cnt=kd=>{const a=PK.filter(p=>p.kid==kd);return a.filter(p=>C[p.c]).length+'/'+a.length};
 KV.push('PEQUENA=registro|LETRAS=|NOME=|LIVRO=|MIN=|FEITAS='+cnt('pequena')+'|OBS=|FOTOS=0');KV.push('PEQUENO=registro|ESTIM='+(()=>{const a=PK.filter(p=>p.kid=='pequeno'),d=a.filter(p=>C[p.c]).length;return !a.length?'':d==a.length?'Sim':d?'Parcial':'Não'})()+'|FEITAS='+cnt('pequeno')+'|OBS=');
 Object.entries(S.jogo||{}).forEach(([g,j])=>{KV.push('JOGO='+g+'|VEZES='+(j.vezes||0)+'|ESTRELAS='+(j.estrelas||'')+'|OPINIAO='+(j.op||''));H.push('Jogo da pausa ('+g+'): jogou '+(j.vezes||0)+' vez(es)'+(j.op?', opinião: '+j.op:''))});
@@ -391,7 +396,7 @@ function corpo(k){var b=B[k],L=linhas(k),i=S.t['i'+k],fh=S.fh[k];
  var h='BLOCO '+(k+1)+' – '+b.t+' (envio do bloco; o resumo final vem depois)';
  return h+'\n\n'+['FORMATO=aula-bloco-v1','DATA='+HOJE,'BLOCOENV='+(k+1)+'|ID='+b.id+'|HORA='+new Date().toTimeString().slice(0,5)+'|FEITOSEG='+(fh&&i?Math.round((fh-i)/1000):'')].concat(L).join('\n')+'\n'}
 function caixa(k){var d=document.getElementById('b'+k);if(!d)return null;var e=d.querySelector('.envb');if(!e){e=document.createElement('div');e.className='envb';e.style.cssText='background:#e3f2fd;border-radius:12px;padding:8px 12px;margin-top:10px;font-size:19px';
- e.innerHTML='<p class="est" style="margin:4px 0;font-weight:bold;color:#1d4e89"></p><button class="bg reenv">📧 Enviar resultado deste bloco</button>';var p=d.querySelector('.pai');(p||d.querySelector('.fimat')).after(e);e.querySelector('.reenv').onclick=function(){envia(k,true)}}return e}
+ e.innerHTML='<p class="est" style="margin:4px 0;font-weight:bold;color:#1d4e89"></p><button class="bg reenv">📧 Enviar resultado deste bloco</button>';var p=d.querySelector('.pai:not(.feitob)');p?p.before(e):d.querySelector('.fimb').after(e);e.querySelector('.reenv').onclick=function(){envia(k,true)}}return e}
 function marca(k){var e=S.envB[k];var c=caixa(k);if(!c)return;c.classList.toggle('hide',!e);if(e)c.querySelector('.est').textContent=(e.env?'✔ Resultado do bloco '+(k+1)+' enviado às '+e.env:'💾 Resultado do bloco '+(k+1)+' salvo às '+e.h+'. Aperte para enviar.')}
 function salva(k){S.envB[k]=Object.assign(S.envB[k]||{},{h:new Date().toTimeString().slice(0,5),body:corpo(k)});sv();marca(k)}
 function envia(k,gesto){salva(k);var e=S.envB[k];if(!gesto&&e.env)return;e.env=new Date().toTimeString().slice(0,5);sv();marca(k);
@@ -401,5 +406,17 @@ document.addEventListener('change',function(e){var c=e.target;if(!(c.closest&&c.
 document.addEventListener('change',function(e){if(e.target.dataset&&e.target.dataset.c=='paidia'){S.paidiaH=e.target.checked?new Date().toTimeString().slice(0,5):'';sv();resumo()}});
 var _fb=fimBloco;fimBloco=function(k,auto){var j=!S.t['f'+k];_fb(k,auto);if(j&&S.t['f'+k]){if(auto)salva(k);else envia(k,false)}};
 B.forEach(function(b,k){marca(k)});})();
+</script>
+<script>
+/* Tempo livre no tablet (jogo + desenho): máx. 60 min por dia (02/11/2026) */
+(function(){const MX=3600;let ult=Date.now();const go=document.getElementById('telaGo'),tx=document.getElementById('telaTxt');
+function jogando(){return [...document.querySelectorAll('.jogo')].some(j=>j.innerHTML.trim())}
+function limite(){return (S.tl||0)>=MX}
+function pinta(){const u=Math.min(MX,Math.floor(S.tl||0));tx.textContent=limite()?'⛔ Acabou o tempo de jogo e desenho de hoje (1 hora). Amanhã tem mais!':'Usado hoje: '+mmss(u)+' de 60:00 · faltam '+mmss(MX-u)+(S.tlOn?' · ⏱ contando':'');
+go.disabled=limite();go.textContent=S.tlOn?'■ Parar tempo livre':'▶ Começar tempo livre (jogo/desenho)';
+document.querySelectorAll('.jg').forEach(b=>{b.disabled=limite();if(limite())b.textContent='⛔ Jogo de hoje acabou (1 hora)'})}
+go.onclick=()=>{if(limite())return;S.tlOn=S.tlOn?0:1;sv();pinta()};
+setInterval(()=>{const n=Date.now(),dt=Math.min(2,(n-ult)/1000);ult=n;if(!limite()&&(S.tlOn||jogando())){S.tl=(S.tl||0)+dt;if(limite()){S.tl=MX;S.tlOn=0;document.querySelectorAll('.card').forEach(d=>{if(d.querySelector('.jogo'))fecha(d)});if(!S.tlAv){S.tlAv=1;try{fala('Acabou o tempo de jogo e desenho de hoje.')}catch(e){}alert('Acabou o tempo de jogo e desenho de hoje (1 hora). Pode desligar o jogo e o desenho.')}}sv()}pinta()},1000);
+document.addEventListener('visibilitychange',()=>{ult=Date.now()});pinta()})();
 </script>
 </body></html>
