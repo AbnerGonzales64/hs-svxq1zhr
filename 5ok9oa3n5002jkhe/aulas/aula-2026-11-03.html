@@ -112,7 +112,7 @@ fala((S.t['auto'+k]?'O tempo acabou. ':'Muito bem! ')+'Sua pausa é de '+Math.ro
 function trava(d,k){const st=!!S.t['i'+k],f=!!S.t['f'+k],wf=!!S.t['wf'+k];d.querySelector('.dica').classList.toggle('hide',st);d.querySelector('.tacab').classList.toggle('hide',!wf);
 d.querySelectorAll('input,textarea,button,label.bl').forEach(el=>{if(el.closest('.opq')||el.closest('.pausa')||el.closest('.kidsec')||el.closest('.pai')||el.closest('.corr')||el.classList.contains('cini')||el.classList.contains('fimb')||el.closest('.tacab'))return;
 const foto=!!el.closest('.foto');const lock=!st||(f&&!(foto&&fotoPend(k)));if(el.tagName=='LABEL')el.classList.toggle('trv',lock);else el.disabled=lock;el.classList.toggle('trv',lock)})}
-function blocoTrav(e){const d=e.target.closest&&e.target.closest('[id^=b]');if(!d||!/^b\d$/.test(d.id))return;const el=e.target;if(el.closest('.opq')||el.closest('.pausa')||el.closest('.kidsec')||el.closest('.pai')||el.closest('.cini')||el.closest('.fimb')||el.closest('.tacab'))return;
+function blocoTrav(e){const d=e.target.closest&&e.target.closest('[id^=b]');if(!d||!/^b\d$/.test(d.id))return;const el=e.target;if(el.closest('.opq')||el.closest('.pausa')||el.closest('.kidsec')||el.closest('.pai')||el.closest('.corr')||el.closest('.cini')||el.closest('.fimb')||el.closest('.tacab'))return;
 const k=+d.id.slice(1);const st=!!S.t['i'+k],f=!!S.t['f'+k];if(!st||(f&&!(el.closest('.foto')&&fotoPend(k)))){if(el.closest('button,input,textarea,label,.it')){e.preventDefault();e.stopImmediatePropagation()}}}
 ['click','input','keydown','beforeinput','change'].forEach(t=>document.addEventListener(t,blocoTrav,true));
 const n=s=>(s||'').trim().toLowerCase().replace(/\s+/g,' ');
