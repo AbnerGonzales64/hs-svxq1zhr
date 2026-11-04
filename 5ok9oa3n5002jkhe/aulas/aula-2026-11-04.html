@@ -1,0 +1,464 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Aulas – quarta 04/11</title>
+<style>
+body{font-family:system-ui,sans-serif;font-size:22px;margin:0;background:#f6f3ea;color:#222}
+main{max-width:640px;margin:auto;padding:16px 16px 60vh}.v{font-style:italic;text-align:center;color:#555;font-size:18px}
+h1{font-size:28px;text-align:center;margin:8px 0}h2{font-size:26px;color:#1d4e89;margin:6px 0}h3{font-size:22px;margin:14px 0 4px}
+.card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px #0002;margin:16px 0;border:4px solid transparent}
+.card.atual{border-color:#ffb300}.card.ok{background:#eaf7ea}.card.pt h2{color:#7e3c9e}
+.card.lock{opacity:.35;filter:grayscale(1);background:#eee}.card.lock>*:not(.trava){pointer-events:none}
+.trava{display:none;text-align:center;font-weight:bold;color:#8a1c1c;background:#fde2e2;border-radius:10px;padding:8px}.card.lock .trava{display:block}
+.inst{background:#fff7d6;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:20px}
+.ouv{background:#4caf50;color:#fff;width:auto!important;padding:4px 12px!important;font-size:18px!important;margin-left:6px}
+button{font-size:22px;padding:14px;border-radius:12px;border:0;margin:6px 0;width:100%}
+.bn{background:#1d4e89;color:#fff}.bl{background:#7e57c2;color:#fff;font-weight:bold}.bg{background:#4caf50;color:#fff;font-weight:bold}
+.txt{background:#eef4fb;border-radius:10px;padding:10px;font-size:20px;line-height:1.5;margin:8px 0}
+.it{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0;font-size:21px}.it input{width:90px}
+.it.certo input{background:#c8e6c9}.it.errado input{background:#ffcdd2}
+.gab{display:none;background:#eaf7ea;border-radius:8px;padding:8px;margin-top:6px;font-size:19px}.gab.ver{display:block}
+label{display:flex;gap:12px;align-items:center;font-size:21px;margin-top:10px}input[type=checkbox]{width:32px;height:32px;flex:none}
+textarea,input[type=text]{box-sizing:border-box;font-size:20px;padding:8px;border-radius:8px;border:1px solid #aaa}textarea{width:100%}
+#barra{position:sticky;top:0;background:#1d4e89;color:#fff;text-align:center;padding:8px;font-size:18px;z-index:2}
+.relo{font-size:40px;text-align:center;font-weight:bold;color:#1d4e89}.pausa{display:none;background:#e0f2f1;border-radius:12px;padding:10px;margin-top:12px;text-align:center}
+.min{float:right;font-size:16px;color:#666}.hide{display:none}.ctg{font-size:20px;font-weight:bold;text-align:center}
+#rtxt{white-space:pre-wrap;font-size:15px;background:#f6f6f6;padding:10px;border-radius:10px}
+.pausa.on{display:block}.foto{background:#fff8e1;border:2px dashed #f0a500;border-radius:12px;padding:10px;margin:10px 0}.foto img{max-width:100%;max-height:260px;display:block;margin:8px auto;border-radius:8px}.foto .st{font-weight:bold;color:#1b5e20;text-align:center}.cron{background:#1d4e89}.cron.stop{background:#c0392b;font-size:22px}.cron:disabled{opacity:.45}.trv{opacity:.45}.dica{text-align:center;color:#c0392b;font-weight:bold;margin:4px 0}.tacab{background:#fdecea;border:2px solid #c0392b;border-radius:12px;padding:10px;margin-top:10px;text-align:center;font-weight:bold;color:#c0392b}.fimat{margin-top:18px;border-top:3px dashed #c0392b;padding-top:8px;text-align:center;font-weight:bold;color:#c0392b}.mf{background:#6a4fb3!important;font-size:17px!important;padding:8px!important}.lemb{font-size:21px;font-weight:bold;color:#00695c}.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}.mem button{height:70px;font-size:22px;font-weight:bold;background:#1d4e89;color:#fff;margin:0;padding:4px}.mem button.ab{background:#fff;color:#1d4e89;border:2px solid #1d4e89}.mem button.par{background:#c8e6c9;color:#1b5e20}.kidsec{background:#fdf2fa;border:3px dashed #b0569a;border-radius:12px;padding:10px;margin-top:14px}.kidsec h3{color:#8e2a76;margin:2px 0 6px}.kidsec label,.pai label{font-size:19px}.pai{background:#eef7ee;border-radius:10px;padding:6px 10px;margin-top:10px}.glo{font-size:17px;color:#555;font-style:italic}.rotc label{font-size:19px}.opq{background:#f3eefc;border:3px solid #7e57c2;border-radius:12px;padding:10px;margin:8px 0}.card.esc>*:not(.opq):not(h2):not(.trava){display:none}.card.lock .opq{display:none}.card.pul{opacity:.7}</style></head><body>
+<div id="barra">Blocos: <b id="cont">0</b> de 8 · ⏱ bloco <b id="crono">--:--</b></div>
+<main><script>window.CW={"0": ["leite", "dente", "sete", "pente", "forte", "O leite está quente."], "1": ["27", "51", "70", "6", "8", "85", "49", "82", "16"], "3": ["bate", "tomate", "sorvete", "noite", "bigode", "chiclete", "peixe", "nome"], "4": ["canto", "mundo", "tinta", "vento", "frente", "grande", "presente", "sorridente", "dente", "pente", "quente"], "5": ["71", "38", "90", "62", "74", "59", "81", "60", "50", "80", "30", "65", "42", "76", "85", "93", "50", "21", "47", "70", "40", "60", "90", "19"], "7": ["7", "8", "9", "10", "7", "10", "8", "10", "10", "7", "10", "9", "7", "7", "9", "10", "6", "9", "10", "4", "10", "10", "8", "8"]};</script>
+<p class="v">“Quer comais, quer bebais ou façais outra coisa qualquer, fazei tudo para a glória de Deus.” 1Co 10.31</p>
+<h1>Aulas de hoje (quarta 04/11): Português, Matemática, CC – Foundations, Português, Português, Matemática, Português, Matemática</h1><p class="v">8 bloco(s) de 25 + 5 min · aprender primeiro, praticar depois</p>
+<div class="card tempo" style="text-align:center;background:#eef4fb"><b style="font-size:24px;color:#1d4e89">⏱ Tempo planejado de hoje: 4h30</b><br><span style="font-size:18px">4h00 de blocos de estudo + 0h30 de devocional/rotina</span></div><div class="card rotc"><h2>Antes das aulas (papai marca)</h2><label><input type="checkbox" data-c="rot0"> <span>08:00–08:30 Devocional em família</span></label></div>
+<div class="inst"><b>Como funciona:</b> são 8 blocos. Cada bloco tem 25 minutos de estudo e 5 minutos de pausa. Faça um bloco de cada vez, de cima para baixo. Em cada bloco: primeiro APRENDER, depois PRATICAR. No começo aperte "Começar cronômetro". Quando terminar, aperte "Parar cronômetro": a pausa começa sozinha. O que for escrito, escreva no papel e mande a foto. Se não quiser pausa, aperte "Pular pausa".<button class="ouv" onclick="falaEl(this)">🔊</button></div>
+<div class="card atual" id="cstart"><button class="bn" id="go">Começar</button></div>
+<div class="card" id="tela" style="border-color:#8e24aa"><h2>🎮🎨 Tempo livre no tablet</h2>
+<div class="inst">Cada bloco de estudo que você terminar vale <b>8 minutos</b> de jogo e desenho no tablet, até no máximo <b>1 hora por dia</b>, somando tudo (os joguinhos da pausa também contam). Antes de jogar ou desenhar fora da página, aperte "Começar". Quando parar, aperte "Parar".<button class="ouv" onclick="falaEl(this)">🔊</button></div>
+<p id="telaTxt" style="font-size:22px;font-weight:bold;color:#1d4e89;text-align:center">Você ganhou 0:00 · usou 0:00 · disponível 0:00 (máx. 60 min)</p>
+<button class="bl" id="telaGo">▶ Começar tempo livre (jogo/desenho)</button></div>
+
+<div id="blocos"></div>
+<div class="card hide" id="fim"><h2>🎉 Terminou as aulas de hoje!</h2>
+<div class="inst"><b>Papai:</b> confira o "Pai conferiu" de cada bloco, escreva a nota (opcional) e aperte o botão verde. O e-mail abre pronto: só aperte Enviar.<button class="ouv" onclick="falaEl(this)">🔊</button></div>
+<label style="display:block">Como apontamos para a glória de Deus (1 linha)<input type="text" data-x="gloria" style="width:100%"></label>
+<label style="display:block">Nota livre do dia<textarea rows="3" data-x="nota"></textarea></label>
+<div id="rtxt"></div><button class="bg" id="env">📧 Finalizar e enviar (Resultado estudos)</button><button class="bn" id="cop">Copiar resumo</button></div>
+<div class="card" id="paidia" style="border-color:#7e3c9e"><h2>👨 Pai conferiu o dia</h2>
+<div class="inst">Papai: anote o que foi feito fora da página (passeio, leitura no papel, feira…) e marque. Isso vai junto no e-mail final.</div>
+<label style="display:block">Feito fora da página hoje<textarea rows="3" data-x="fora" placeholder="Ex.: leitura no papel 20 min; feira com o pai"></textarea></label>
+<label><input type="checkbox" data-c="paidia"> <b>Pai conferiu o dia</b></label></div>
+</main>
+<script>
+const HOJE=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Fortaleza'}).format(new Date());const CFG=window.CFG||{};const K='aula-'+HOJE+(CFG.chave?'-'+CFG.chave:''),S=JSON.parse(localStorage.getItem(K)||'{}');S.ok=S.ok||[];S.f=S.f||{};S.t=S.t||{};const sv=()=>localStorage.setItem(K,JSON.stringify(S));
+/* Já feito (03/11): CFG.ja_feito = blocos (base 0) feitos em outro momento: ficam travados como prontos, contam no total e no tempo de tela. CFG.refazer = blocos marcados rápido demais: zera uma vez só. */
+(function(){const L=s=>String(s||'').split(',').filter(x=>x!=='').map(Number);S.lib=S.lib||{};S.perg=S.perg||{};S.c=S.c||{};S.fh=S.fh||{};
+const RF=L(CFG.refazer),fl='rf'+(CFG.refazer_id||1);if(RF.length&&!S[fl]){RF.forEach(k=>{['i','f','p','sk','pf','auto','L','sob','bk','op'].forEach(n=>delete S.t[n+k]);delete S.lib[k];delete S.perg[k];delete S.fh[k];S.c['feito'+k]=false});S[fl]=1}
+L(CFG.ja_feito).forEach(k=>{const n=Date.now();if(!S.t['f'+k]||S.t['f'+k]-(S.t['i'+k]||0)<60000){S.t['f'+k]=n;S.t['i'+k]=n-1500000}if(!S.t['p'+k]){S.t['p'+k]=S.t['f'+k];S.t['sk'+k]=1}S.c['feito'+k]=true;if(!S.lib[k])S.lib[k]={m:'já feito',h:''};S.perg[k]=S.perg[k]&&S.perg[k].ok?S.perg[k]:{ok:1,t:0};if(!S.fh[k]||S.fh[k]-S.t['i'+k]<60000)S.fh[k]=S.t['f'+k]});
+localStorage.setItem(K,JSON.stringify(S))})();
+var PTV=null;function achaVoz(){var s=window.speechSynthesis;if(!s)return null;var vs=s.getVoices()||[],pr=/Brasil|Brazil|Luciana|Google portugu[eê]s do Brasil|Francisca|Felipe/i;var pb=vs.filter(function(v){return /^pt[-_]BR/i.test(v.lang)});PTV=pb.filter(function(v){return pr.test(v.name)})[0]||pb[0]||vs.filter(function(v){return /^pt/i.test(v.lang)})[0]||null;if(vs.length)avisoVoz(!PTV);return PTV}
+function avisoVoz(on){var d=document.getElementById('avisoVoz');if(!on){if(d)d.remove();return}if(d||!document.body)return;d=document.createElement('div');d.id='avisoVoz';d.setAttribute('role','alert');d.style.cssText='position:fixed;left:8px;right:8px;bottom:8px;z-index:99;background:#fff3cd;color:#7a4b00;border:2px solid #f0a500;border-radius:12px;padding:12px;font:bold 17px system-ui,sans-serif;text-align:center';d.textContent='O celular não tem voz em português. Peça ao papai para instalar a voz Português (Brasil) nas configurações de fala.';document.body.appendChild(d)}
+function vozPT(u){var v=PTV||achaVoz();if(v){u.voice=v;u.lang=v.lang.replace('_','-')}else u.lang='pt-BR';return u}
+if(window.speechSynthesis){achaVoz();try{speechSynthesis.addEventListener('voiceschanged',achaVoz)}catch(e){speechSynthesis.onvoiceschanged=achaVoz}setTimeout(achaVoz,1500)}
+function falaDuas(L){var s=window.speechSynthesis;if(!s||!window.SpeechSynthesisUtterance)return false;s.cancel();L=[].concat(L);var g=window.__dG=(window.__dG||0)+1,i=0;
+function um(t,r,cb){var u=vozPT(new SpeechSynthesisUtterance(t));u.rate=r;var feito=false;u.onend=u.onerror=function(){if(feito||g!==window.__dG)return;feito=true;cb()};s.speak(u)}
+function prox(){if(g!==window.__dG||i>=L.length)return;var t=L[i++];um(t,0.6,function(){setTimeout(function(){if(g!==window.__dG)return;um(t,0.95,function(){setTimeout(prox,1200)})},1200)})}
+prox();return true}
+function fala(t){try{tgStop();speechSynthesis.cancel();const u=vozPT(new SpeechSynthesisUtterance(t));u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+function falaEl(b){tg(b,b.parentNode.innerText.replace(/🔊|⏸ Pausar|▶ Continuar de onde parou|⟲ Do início/g,''))}
+var TG={b:null,steps:[],i:0,on:false,g:0};
+function tgLab(b,st){if(!b)return;if(b._lab==null)b._lab=b.innerHTML;b.innerHTML=st=='play'?'⏸ Pausar':st=='pause'?'▶ Continuar de onde parou':b._lab;if(st=='pause'){if(!b._rc){var r=document.createElement('button');r.className='bn';r.style.cssText='width:auto;padding:4px 12px;font-size:17px;margin-left:6px';r.textContent='⟲ Do início';r.onclick=function(){var bb=b;TG.i=0;TG.on=true;TG.g++;tgLab(bb,'play');speechSynthesis.cancel();setTimeout(tgRun,150)};b.insertAdjacentElement('afterend',r);b._rc=r}}else if(b._rc){b._rc.remove();b._rc=null}}
+function tgStop(){if(TG.on){TG.on=false;TG.g++;tgLab(TG.b,'pause')}}
+function tg(b,t,dois){var s=window.speechSynthesis;if(!s||!window.SpeechSynthesisUtterance)return;
+if(TG.b===b&&TG.on){TG.on=false;TG.g++;s.cancel();tgLab(b,'pause');return}
+if(TG.b===b&&!TG.on&&TG.i>0&&TG.i<TG.steps.length){TG.on=true;TG.g++;tgLab(b,'play');s.cancel();setTimeout(tgRun,150);return}
+if(TG.b&&TG.b!==b)tgLab(TG.b,'reset');
+var st=dois?[[t,.6,1200],[t,.95,300]]:String(t).split(/(?<=[.!?;:])\s+/).filter(function(x){return x.trim()}).map(function(x){return[x,.9,150]});
+TG={b:b,steps:st,i:0,on:true,g:TG.g+1};tgLab(b,'play');s.cancel();setTimeout(tgRun,150)}
+function tgRun(){if(!TG.on)return;var g=TG.g;if(TG.i>=TG.steps.length){TG.on=false;var b=TG.b;TG.i=0;tgLab(b,'reset');return}var st=TG.steps[TG.i],u=vozPT(new SpeechSynthesisUtterance(st[0]));u.rate=st[1];var done=false;u.onend=u.onerror=function(){if(done||g!==TG.g)return;done=true;TG.i++;setTimeout(function(){if(g===TG.g)tgRun()},st[2])};speechSynthesis.speak(u)}
+
+const I=(t)=>`<div class="inst"><b>O que fazer:</b> ${t}<button class="ouv" onclick="falaEl(this)">🔊</button></div>`;
+// item com conferência automática: id, pergunta, resposta
+const XO=(q,a)=>`<details class="xo" style="background:#f3f0ff;border:2px dashed #8e7cc3;border-radius:10px;padding:8px;margin:8px 0"><summary><b>⭐ Extra opcional</b> (pode fazer ou pular; não conta)</summary><p>${q}</p><details><summary>Ver resposta</summary><p>${a}</p></details></details>`;
+const Q=(id,q,a,g)=>`<div class="it" data-a="${a}" data-g="${g}" id="i_${id}"><span>${q}</span><input type="text" data-f="${id}" inputmode="${/^[0-9]+$/.test(a)?'numeric':'text'}" autocapitalize="none"></div>`;
+const confer=(g)=>`<button class="bn" onclick="corrige('${g}')">✔ Corrigir</button><p class="ctg" id="c_${g}"></p>`;
+const gab=(t)=>`<button class="bl" onclick="this.nextElementSibling.classList.toggle('ver')">Mostrar / esconder o gabarito</button><div class="gab">${t}</div>`;
+const dit=(id,t)=>`<div class="it"><button class="bg" style="width:auto" onclick="tg(this,'${t.replace(/'/g,"\\'")}',1)">▶ Ouvir ${id}</button><span style="flex:1">escreva no papel</span></div>`;
+// foto da escrita: instrução → conteúdo → campo (foto)
+const FOTO=(id,k,lab)=>`<div class="foto" id="fo_${id}" data-k="${k}" data-lab="${lab}"><b>📷 Foto do papel: ${lab}</b>${I('Quando terminar de escrever no papel, aperte o botão abaixo e tire uma foto bem de cima, com luz. Confira se dá para ler e aperte Enviar foto para correção.')}<label class="bl" style="display:block;text-align:center;padding:12px;border-radius:10px;color:#fff;background:#1d4e89">📷 Tirar ou escolher foto<input type="file" accept="image/*" capture="environment" style="display:none" onchange="fotoSel('${id}',this)"></label><img class="hide"><button class="bg hide ef" onclick="fotoEnv('${id}')">📤 Enviar foto para correção</button><p class="st"></p></div>`;
+const ROT=[{"t": "08:00–08:30 Devocional em família", "id": "devocional"}];
+const B=[
+{op:0,m:0,t:"Português: aprender o -e final, depois ditado curto",id:"portugues",g:[],dit:true,pk:[],k:"",gl:"Glória de Deus: Deus nos deu a linguagem; escrever com cuidado é amar quem vai ler (Pv 22.20–21).",c:""+`<div class="txt"><b>📘 APRENDER (cerca de 8 min)</b><br>${"Muitas palavras terminam com um som que parece i, mas se escrevem com e. Você fala \"forti\", mas escreve forte. A regra: no fim da palavra, quando o som é fraquinho, escreva e. Em quente, elefante e grande tem um n antes do t ou do d: quen-te, e-le-fan-te, gran-de. Exemplo 1: fala \"leiti\", escreve leite. Exemplo 2: fala \"grandi\", escreve grande. Ontem dente, pente e quente saíram sem o n (\"Deite\", \"peite\", \"queti\"): fale devagar den-te, pen-te, quen-te e escute o som pelo nariz antes do t."}</div><button class="bg" onclick="tg(this,this.previousElementSibling.innerText.replace('📘 APRENDER (cerca de 8 min)',''))">🔊 Ouvir a explicação</button>`+I("Pergunta rápida (no papel): como se escreve a palavra que você fala \"denti\"? Escreva no papel e depois abra o gabarito.")+I("📝 PRATICAR. ditado curto no papel (cerca de 17 min). 5 palavras e 1 frase; cada uma toca devagar e depois normal. Escreva no papel, uma embaixo da outra, com o número.")+I("Aperte Ouvir: vem devagar e depois normal. Escreva no papel com o número.")+dit(1,"leite")+dit(2,"dente")+dit(3,"sete")+dit(4,"pente")+dit(5,"forte")+dit('frase',"O leite está quente.")+FOTO('f0',0,"ditado")+I("Confira você mesma no papel com o gabarito e anote abaixo.")+gab("pergunta rápida = dente. Ditado: 1 leite · 2 dente · 3 sete · 4 pente · 5 forte · Frase: O leite está quente.")+`<label style="display:block">Acertos do ditado (x/N)<input type="text" data-f="dit_ac0" placeholder="x/N"></label><label style="display:block">Quais errou? (vazio = nenhuma)<input type="text" data-f="dit_erros0" style="width:100%"></label>`+XO("fala \"pen-ti\" devagar, escreve","pente")+XO("fala \"quen-ti\" devagar, escreve","quente")},
+{op:0,m:1,t:"Matemática: aprender dezenas e unidades, depois praticar",id:"matematica",g:["k1", "p1"],dit:false,pk:[],k:"",gl:"Glória de Deus: Deus é Deus de ordem; contar em grupos de 10 mostra a ordem que Ele pôs nos números (1Co 14.33).",c:""+`<div class="txt"><b>📘 APRENDER (cerca de 8 min)</b><br>${"Os números até 100 são feitos de dezenas e unidades. Uma dezena é um grupo de 10. As unidades são as que sobram soltas. Exemplo 1: 46 são 4 dezenas e 6 unidades. Exemplo 2: 2 dezenas e 3 unidades são 23."}</div><button class="bg" onclick="tg(this,this.previousElementSibling.innerText.replace('📘 APRENDER (cerca de 8 min)',''))">🔊 Ouvir a explicação</button>`+I("Pergunta rápida: responda e aperte Corrigir.")+Q('b1k',"3 dezenas e 5 unidades =","35",'k1')+confer('k1')+I("📝 PRATICAR. Escreva a resposta e aperte Corrigir no fim. Os mesmos itens de ontem, na mesma ordem.")+Q('b1q1',"2 dezenas e 7 unidades =","27",'p1')+Q('b1q2',"5 dezenas e 1 unidade =","51",'p1')+Q('b1q3',"7 dezenas e 0 unidades =","70",'p1')+Q('b1q4',"Em 68, quantas dezenas?","6",'p1')+Q('b1q5',"Em 68, quantas unidades?","8",'p1')+Q('b1q6',"58 ou 85:","85",'p1')+Q('b1q7',"4 dezenas e 9 unidades =","49",'p1')+Q('b1q8',"8 dezenas e 2 unidades =","82",'p1')+Q('b1q9',"1 dezena e 6 unidades =","16",'p1')+confer('p1')+gab("pergunta rápida = 35. Prática: 27 · 51 · 70 · 6 · 8 · 85 · 49 · 82 · 16.")+XO("6 dezenas e 4 unidades =","64")+XO("Em 93, quantas dezenas?","9")+XO("Em 93, quantas unidades?","3")},
+{op:0,m:1,t:"CC – Foundations: revisão das matérias, como em 29 e 30/10",id:"foundations",g:[],dit:false,pk:[],k:"",gl:"Glória de Deus: a luz que vemos e a ordem dos números foram feitas por Deus, que é luz e não muda (1Jo 1.5; Tg 1.17).",c:""+I("É a mesma revisão de 03/11: só as músicas das Semanas 15 a 21. Nada novo.")+I("📝 PRATICAR. Toque em cada música: primeiro aparece o que é, depois o texto, depois a música toca. Cante junto. Faça as matérias na ordem.")+`<iframe src="../aulas/cc-revisao-v3.html" allow="autoplay; web-share" style="width:100%;height:92vh;border:0;border-radius:12px;display:block;margin:10px 0;background:#f6f3ea"></iframe><p style="text-align:center"><a href="../aulas/cc-revisao-v3.html" target="_blank" style="font-size:22px;font-weight:bold">🔎 Abrir a revisão em tela cheia</a></p>`+XO("Cante de novo para o pai, sem o áudio, a música de Matemática de que você mais gosta","(cantar)")+XO("Cante de novo, sem o áudio, uma música de Latim","(cantar)")},
+{op:0,m:0,t:"Português: o -e final (revisão do ditado)",id:"portugues",g:["k3", "p3"],dit:false,pk:[],k:"",gl:"Glória de Deus: escrever com cuidado é amar quem vai ler (Pv 22.20–21).",c:""+`<div class="txt"><b>📘 APRENDER (cerca de 8 min)</b><br>${"No último ditado, o fim das palavras virou i: você escreveu \"forti\", \"seiti\" e \"leiti\". Lembre a regra: no fim da palavra, quando o som é fraquinho, a gente ouve i, mas escreve e. Exemplo 1: fala \"noiti\", escreve noite. Exemplo 2: fala \"tomati\", escreve tomate. Ontem o fim saiu certo em todas! O que faltou foi o meio da palavra: bata palmas em cada pedaço antes de escrever: sor-ve-te (tem rv), chi-cle-te (tem cl), pei-xe (tem ei e x)."}</div><button class="bg" onclick="tg(this,this.previousElementSibling.innerText.replace('📘 APRENDER (cerca de 8 min)',''))">🔊 Ouvir a explicação</button>`+I("Pergunta rápida: responda e aperte Corrigir.")+Q('b3k',"como se escreve a palavra que você fala \"forti\"?","forte",'k3')+confer('k3')+I("📝 PRATICAR. Escreva no papel a palavra certa, com e no fim. Depois digite aqui.")+Q('b3q1',"fala \"bati\", escreve","bate",'p3')+Q('b3q2',"fala \"tomati\", escreve","tomate",'p3')+Q('b3q3',"fala \"sorveti\", escreve","sorvete",'p3')+Q('b3q4',"fala \"noiti\", escreve","noite",'p3')+Q('b3q5',"fala \"bigodi\", escreve","bigode",'p3')+Q('b3q6',"fala \"chicloti\", escreve","chiclete",'p3')+Q('b3q7',"fala \"pexi\", escreve","peixe",'p3')+Q('b3q8',"fala \"nomi\", escreve","nome",'p3')+confer('p3')+gab("pergunta rápida = forte. Prática: bate · tomate · sorvete · noite · bigode · chiclete · peixe · nome.")+XO("fala \"pei-xi\" bem devagar, escreve","peixe")+XO("fala \"chi-cle-ti\" bem devagar, escreve","chiclete")+FOTO('f3',3,"palavras com -e final")},
+{op:0,m:0,t:"Português: n antes de t e d",id:"portugues",g:["k4", "p4"],dit:true,pk:[],k:"",gl:"Glória de Deus: Deus fez o mundo inteiro com a Sua palavra (Hb 11.3).",c:""+`<div class="txt"><b>📘 APRENDER (cerca de 8 min)</b><br>${"Fale a palavra bem devagar. Se o som passar pelo nariz antes do t ou do d, escreva n. Exemplo 1: can-to, com n antes do t. Exemplo 2: mun-do, com n antes do d. E se a palavra terminar com som de i fraquinho, escreva e: quen-te, gran-de. Ontem dente, pente e quente saíram sem o n. Fale devagar: den-te, pen-te, quen-te. No \"den\", no \"pen\" e no \"quen\" o som passa pelo nariz: então escreva n antes do t. No fim do bloco tem um ditado curto, sem modelo."}</div><button class="bg" onclick="tg(this,this.previousElementSibling.innerText.replace('📘 APRENDER (cerca de 8 min)',''))">🔊 Ouvir a explicação</button>`+I("Pergunta rápida: responda e aperte Corrigir.")+Q('b4k',"como se escreve \"denti\"?","dente",'k4')+confer('k4')+I("📝 PRATICAR. Escreva no papel a palavra certa. Depois digite aqui.")+Q('b4q1',"fala \"ca-to\" (de cantar), escreve","canto",'p4')+Q('b4q2',"fala \"mu-do\" (o planeta), escreve","mundo",'p4')+Q('b4q3',"fala \"ti-ta\" (de pintar), escreve","tinta",'p4')+Q('b4q4',"fala \"ve-to\" (do ar), escreve","vento",'p4')+Q('b4q5',"fala \"fren-ti\", escreve","frente",'p4')+Q('b4q6',"fala \"gran-di\", escreve","grande",'p4')+Q('b4q7',"fala \"pre-zen-ti\", escreve","presente",'p4')+Q('b4q8',"fala \"sorri-den-ti\", escreve","sorridente",'p4')+confer('p4')+gab("pergunta rápida = dente. Prática: canto · mundo · tinta · vento · frente · grande · presente · sorridente.")+I("Agora o ditado sem modelo: não olhe nenhuma palavra escrita. Ouça, fale devagar e escreva no papel.")+I("Aperte Ouvir: vem devagar e depois normal. Escreva no papel com o número.")+dit(1,"dente")+dit(2,"pente")+dit(3,"quente")+I("Confira você mesma no papel com o gabarito e anote abaixo.")+gab("1 dente · 2 pente · 3 quente (as três com n antes do t e e no fim).")+`<label style="display:block">Acertos do ditado (x/N)<input type="text" data-f="dit_ac4" placeholder="x/N"></label><label style="display:block">Quais errou? (vazio = nenhuma)<input type="text" data-f="dit_erros4" style="width:100%"></label>`+FOTO('f4',4,"palavras com n antes de t/d e ditado")+XO("fala \"gran-di\" devagar, escreve","grande")+XO("fala \"ven-to\" e bate palmas: quantos pedaços?","2 (ven-to)")},
+{op:0,m:1,t:"Matemática: revisão de comparar até 100",id:"matematica",g:["k5", "p5"],dit:false,pk:[],k:"",gl:"Glória de Deus: Deus é Deus de ordem (1Co 14.33).",c:""+`<div class="txt"><b>📘 APRENDER (cerca de 8 min)</b><br>${"Para saber qual número é maior, olhe primeiro as dezenas. Se as dezenas forem iguais, olhe as unidades. Exemplo: 63 e 36: 6 dezenas é mais que 3, então 63 é maior."}</div><button class="bg" onclick="tg(this,this.previousElementSibling.innerText.replace('📘 APRENDER (cerca de 8 min)',''))">🔊 Ouvir a explicação</button>`+I("Pergunta rápida: responda e aperte Corrigir.")+Q('b5k',"Qual é o maior, 54 ou 45?","54",'k5')+confer('k5')+I("📝 PRATICAR. Escreva o maior.")+Q('b5q1',"71 ou 17:","71",'p5')+Q('b5q2',"33 ou 38:","38",'p5')+Q('b5q3',"90 ou 89:","90",'p5')+Q('b5q4',"26 ou 62:","62",'p5')+Q('b5q5',"47 ou 74:","74",'p5')+Q('b5q6',"55 ou 59:","59",'p5')+Q('b5q7',"18 ou 81:","81",'p5')+Q('b5q8',"60 ou 06:","60",'p5')+I("Agora escreva o número que vem logo depois.")+Q('b5q9',"Depois de 49 vem","50",'p5')+Q('b5q10',"Depois de 79 vem","80",'p5')+Q('b5q11',"Depois de 29 vem","30",'p5')+Q('b5q12',"Depois de 64 vem","65",'p5')+I("Mais um pouco (você foi rápida e acertou quase tudo ontem): escreva o maior.")+Q('b5q13',"42 ou 24:","42",'p5')+Q('b5q14',"67 ou 76:","76",'p5')+Q('b5q15',"85 ou 58:","85",'p5')+Q('b5q16',"39 ou 93:","93",'p5')+Q('b5q17',"50 ou 49:","50",'p5')+Q('b5q18',"12 ou 21:","21",'p5')+Q('b5q19',"44 ou 47:","47",'p5')+Q('b5q20',"70 ou 07:","70",'p5')+I("Agora escreva o número que vem logo depois.")+Q('b5q21',"Depois de 39 vem","40",'p5')+Q('b5q22',"Depois de 59 vem","60",'p5')+Q('b5q23',"Depois de 89 vem","90",'p5')+Q('b5q24',"Depois de 18 vem","19",'p5')+confer('p5')+gab("pergunta rápida = 54. Prática: 71 · 38 · 90 · 62 · 74 · 59 · 81 · 60 · 50 · 80 · 30 · 65 · 42 · 76 · 85 · 93 · 50 · 21 · 47 · 70 · 40 · 60 · 90 · 19.")+XO("Qual é o menor, 35 ou 53?","35")+XO("Depois de 99 vem","100")+XO("Qual é o maior, 88 ou 80?","88")},
+{op:0,m:0,t:"Português: caligrafia das palavras corrigidas",id:"portugues",g:[],dit:false,pk:[],k:"",gl:"Glória de Deus: fazer bem feito, mesmo nas coisas pequenas, é para o Senhor (Cl 3.23).",c:""+`<div class="txt"><b>📘 APRENDER (cerca de 8 min)</b><br>${"Antes de copiar, lembre as duas regras do ditado. No fim da palavra, o som fraquinho de i se escreve com e: lei-te, se-te, for-te. O som que passa pelo nariz antes do t se escreve com n: den-te, pen-te, quen-te. Na letra cursiva, as letras de uma palavra ficam ligadas. Exemplo: leite."}</div><button class="bg" onclick="tg(this,this.previousElementSibling.innerText.replace('📘 APRENDER (cerca de 8 min)',''))">🔊 Ouvir a explicação</button>`+I("📝 PRATICAR. Copie no caderno, com a letra cursiva caprichada, as palavras do ditado, agora certas: leite, dente, sete, pente, forte. Escreva cada uma 3 vezes. Depois copie a frase \"O leite está quente.\" com maiúscula no começo e ponto no fim.")+FOTO('f6',6,"caligrafia")+XO("Copie mais uma vez, em cursiva caprichada: quente","quente")+XO("Copie em cursiva: pente e dente","pente e dente")},
+{op:0,m:1,t:"Matemática: revisão dos fatos de soma até 10",id:"matematica",g:["k7", "p7"],dit:false,pk:[],k:"",gl:"Glória de Deus: Deus é Deus de ordem (1Co 14.33).",c:""+`<div class="txt"><b>📘 APRENDER (cerca de 8 min)</b><br>${"Somar é juntar. Se você sabe 6 + 3, também sabe 3 + 6. Comece pelo número maior e conte para frente. Exemplo: 2 + 7: comece no 7 e conte 8, 9."}</div><button class="bg" onclick="tg(this,this.previousElementSibling.innerText.replace('📘 APRENDER (cerca de 8 min)',''))">🔊 Ouvir a explicação</button>`+I("Pergunta rápida: responda e aperte Corrigir.")+Q('b7k',"3 + 6 =","9",'k7')+confer('k7')+I("📝 PRATICAR. Responda. Use os dedos se precisar.")+Q('b7q1',"2 + 5 =","7",'p7')+Q('b7q2',"4 + 4 =","8",'p7')+Q('b7q3',"1 + 8 =","9",'p7')+Q('b7q4',"3 + 7 =","10",'p7')+Q('b7q5',"5 + 2 =","7",'p7')+Q('b7q6',"6 + 4 =","10",'p7')+Q('b7q7',"2 + 6 =","8",'p7')+Q('b7q8',"9 + 1 =","10",'p7')+Q('b7q9',"5 + 5 =","10",'p7')+Q('b7q10',"3 + 4 =","7",'p7')+Q('b7q11',"2 + 8 =","10",'p7')+Q('b7q12',"6 + 3 =","9",'p7')+I("Mais um pouco (ontem você acertou tudo rapidinho): responda.")+Q('b7q13',"1 + 6 =","7",'p7')+Q('b7q14',"4 + 3 =","7",'p7')+Q('b7q15',"7 + 2 =","9",'p7')+Q('b7q16',"8 + 2 =","10",'p7')+Q('b7q17',"3 + 3 =","6",'p7')+Q('b7q18',"5 + 4 =","9",'p7')+Q('b7q19',"4 + 6 =","10",'p7')+Q('b7q20',"2 + 2 =","4",'p7')+Q('b7q21',"7 + 3 =","10",'p7')+Q('b7q22',"1 + 9 =","10",'p7')+Q('b7q23',"6 + 2 =","8",'p7')+Q('b7q24',"5 + 3 =","8",'p7')+confer('p7')+gab("pergunta rápida = 9. Prática: 7 · 8 · 9 · 10 · 7 · 10 · 8 · 10 · 10 · 7 · 10 · 9 · 7 · 7 · 9 · 10 · 6 · 9 · 10 · 4 · 10 · 10 · 8 · 8.")+XO("Se 6 + 3 = 9, quanto é 3 + 6?","9")+XO("4 + 5 =","9")+XO("7 + 1 + 2 =","10")}];
+const W=document.getElementById('blocos');
+B.forEach((b,k)=>{const d=document.createElement('div');d.id='b'+k;d.dataset.pt=b.m?'':'1';
+d.innerHTML=`<div class="trava">${b.op?"🔒 Opcional: aparece quando você terminar todos os blocos obrigatórios":"🔒 Termine o bloco de cima e a pausa primeiro"}</div>${b.op?`<div class="opq"><p style="font-weight:bold;text-align:center">Você quer fazer este opcional: ${b.t}?</p><button class="bg opsim">✅ Quero fazer</button><button class="bm opnao">🚫 Não quero fazer</button><p class="oppul hide" style="text-align:center;font-weight:bold;color:#555">Pulado (não quis fazer). <button class="bn opvolta" style="font-size:16px;padding:6px;width:auto">Mudei de ideia</button></p></div>`:""}<h2>${b.t}<span class="min">25 + 5 min</span></h2>
+<button class="bn cron cini">▶ Começar cronômetro</button><p class="dica">🔒 Aperte Começar cronômetro para liberar</p><div class="relo" id="rb${k}">25:00</div>${b.c}<div class="fimat">🏁 Fim da atividade do bloco</div><button class="bn cron stop fimb">■ Parar cronômetro (terminei o bloco)</button><div class="tacab hide"><p>⏰ O tempo acabou. Tire a foto do papel e envie.</p><button class="bl sf" style="background:#777">Sem foto / pular</button></div>
+${b.k||""}<div class="pai"><label><input type="checkbox" data-c="pai${k}"> Pai conferiu este bloco</label></div>${b.gl?`<p class="glo">${b.gl}</p>`:""}<div class="pausa"><b>☕ Pausa de 5 minutos</b><p class="ext" style="font-size:20px;font-weight:bold;color:#1d4e89"></p><p class="lemb">💧 Hora de beber água e ir ao banheiro, se precisar.</p><div class="relo" id="rp${k}">5:00</div><button class="bl jg">🎈 Jogar Estoura Balões</button><div class="jogo"></div><button class="bn pk">⏭ Pular pausa (guardar o tempo)</button></div>`;
+W.appendChild(d);if(b.op){const so=v=>{S.t['op'+k]=v;sv();upd()};d.querySelector('.opsim').onclick=()=>so('sim');d.querySelector('.opnao').onclick=()=>so('nao');d.querySelector('.opvolta').onclick=()=>so('')}
+d.querySelector('.cini').onclick=()=>{if(!S.t['i'+k]){S.t['i'+k]=Date.now();sv();fala('Cronômetro começou. Bom estudo!')}upd()};
+d.querySelector('.fimb').onclick=()=>fimBloco(k,false);d.querySelector('.sf').onclick=()=>{S.t['nf'+k]=1;sv();if(S.t['wf'+k])iniPausa(k)};
+d.querySelector('.jg').onclick=()=>memoria(d.querySelector('.jogo'));d.querySelector('.pk').onclick=()=>{fecha(d);pula(k)};const pula=()=>{const p=S.t['p'+k];if(p&&!S.t['sk'+k]&&!S.t['pf'+k]){const g=Math.max(0,(S.t['L'+k]||300)-Math.floor((Date.now()-p)/1000));const g2=Math.min(g,Math.max(0,3600-(S.bank||0)));S.t['gu'+k]=g2;S.bank=Math.min(3600,(S.bank||0)+g2)}S.t['sk'+k]=1;S.t['pf'+k]=1;sv();upd();const nx=document.getElementById('b'+(k+1));if(nx)nx.scrollIntoView({behavior:'smooth'})}});
+document.querySelectorAll('[data-f]').forEach(el=>{el.value=S.f[el.dataset.f]||'';el.oninput=()=>{S.f[el.dataset.f]=el.value;sv()}});
+
+const ES={"0": ["f0"], "3": ["f3"], "4": ["f4"], "6": ["f6"]};
+const fotoPend=k=>(ES[k]||[]).some(x=>!S.f['foto_'+x])&&!S.t['nf'+k];
+function fimBloco(k,auto){if(!S.t['i'+k]||S.t['f'+k])return;S.t['f'+k]=auto?S.t['i'+k]+1500000:Date.now();S.t['auto'+k]=auto?1:0;S.t['sob'+k]=Math.max(0,1500-Math.floor((S.t['f'+k]-S.t['i'+k])/1000));S.t['pf'+k]=0;S.t['sk'+k]=0;
+if(auto&&fotoPend(k)){S.t['wf'+k]=1;sv();fala('O tempo acabou. Tire a foto do papel e envie.');upd();return}iniPausa(k)}
+function iniPausa(k){if(S.t['p'+k])return;const ul=k==B.length-1,bk=ul?0:(S.bank||0);S.t['bk'+k]=bk;if(!ul)S.bank=0;S.t['L'+k]=300+(S.t['sob'+k]||0)+bk;S.t['p'+k]=Date.now();S.t['wf'+k]=0;sv();
+fala((S.t['auto'+k]?'O tempo acabou. ':'Muito bem! ')+'Sua pausa é de '+Math.round(S.t['L'+k]/60)+' minutos. Hora de beber água e ir ao banheiro, se precisar.');upd()}
+function trava(d,k){const st=!!S.t['i'+k],f=!!S.t['f'+k],wf=!!S.t['wf'+k];d.querySelector('.dica').classList.toggle('hide',st);d.querySelector('.tacab').classList.toggle('hide',!wf);
+d.querySelectorAll('input,textarea,button,label.bl').forEach(el=>{if(el.closest('.opq')||el.closest('.pausa')||el.closest('.kidsec')||el.closest('.pai')||el.closest('.corr')||el.classList.contains('cini')||el.classList.contains('fimb')||el.closest('.tacab'))return;
+const foto=!!el.closest('.foto');const lock=!st||(f&&!(foto&&fotoPend(k)));if(el.tagName=='LABEL')el.classList.toggle('trv',lock);else el.disabled=lock;el.classList.toggle('trv',lock)})}
+function blocoTrav(e){const d=e.target.closest&&e.target.closest('[id^=b]');if(!d||!/^b\d$/.test(d.id))return;const el=e.target;if(el.closest('.opq')||el.closest('.pausa')||el.closest('.kidsec')||el.closest('.pai')||el.closest('.corr')||el.closest('.cini')||el.closest('.fimb')||el.closest('.tacab'))return;
+const k=+d.id.slice(1);const st=!!S.t['i'+k],f=!!S.t['f'+k];if(!st||(f&&!(el.closest('.foto')&&fotoPend(k)))){if(el.closest('button,input,textarea,label,.it')){e.preventDefault();e.stopImmediatePropagation()}}}
+['click','input','keydown','beforeinput','change'].forEach(t=>document.addEventListener(t,blocoTrav,true));
+const n=s=>(s||'').trim().toLowerCase().replace(/\s+/g,' ');
+function corrige(g){let ok=0,t=0;const sel='.it[data-g="'+g+'"]';
+document.querySelectorAll(sel).forEach(it=>{t++;const nz=x=>x.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[.!?\s]+$/,'').replace(/\s+/g,' ').trim();const v=it.querySelector('input').value.trim();const c=nz(v)==nz(it.dataset.a);it.className='it '+(c?'certo':'errado');if(c)ok++});
+S.f['acertos_'+g]=ok+'/'+t;sv();document.getElementById('c_'+g).textContent=`Você acertou ${ok} de ${t}. Os vermelhos estão errados: tente de novo.`}
+const FX={};function fat(on,v){const id='rf'+(v||'');if(on){FX[id]=Date.now();clearInterval(FX[id+'h']);FX[id+'h']=setInterval(()=>document.getElementById(id).textContent=Math.round((Date.now()-FX[id])/1000)+' s',250)}
+else if(FX[id]){clearInterval(FX[id+'h']);S.f['fatos_seg'+(v||'')]=Math.round((Date.now()-FX[id])/1000);sv();FX[id]=0}}
+function fecha(d){d.querySelector('.jogo').innerHTML=''}
+function memoria(el){/* substituído em 30/10/2026 pelo Estoura Balões */balao(el)}
+function palavrasDia(){const w=new Set();document.querySelectorAll('button[onclick^="tg(this"]').forEach(b=>{const m=(b.getAttribute('onclick')||'').match(/tg\(this,'(.+?)',1\)/);if(m)m[1].split(/[\s,.!?]+/).forEach(x=>{x=x.toLowerCase();if(x.length>=4&&/[a-zà-ú]/.test(x))w.add(x)})});const L=[...w];return L.length>=3?L:['leite','dente','sete','pente','forte','quente']}
+function erradas(p){const o=new Set();if(/e$/.test(p))o.add(p.replace(/e$/,'i'));if(/n[td]/.test(p))o.add(p.replace(/n([td])/,'$1'));if(/ei/.test(p))o.add(p.replace('ei','e'));if(/^[a-z]/.test(p))o.add(p.replace(/([aeiou])([^aeiou]*)$/,(m,a,b)=>({a:'o',e:'i',i:'e',o:'u',u:'o'}[a])+b));o.delete(p);return [...o]}
+function jogoFb(el,id,nome){const box=document.createElement('div');box.className='jfb';box.style.cssText='background:#fff;border:3px solid #7e57c2;border-radius:12px;padding:10px;margin-top:8px';
+box.innerHTML='<p style="margin:4px 0;font-weight:bold">O que você achou do '+nome+'?</p>';
+[['gostei','😀 Gostei'],['de novo amanhã','🔁 Quero jogar de novo amanhã'],['outro jogo amanhã','🆕 Quero outro jogo amanhã']].forEach(([v,l])=>{const b=document.createElement('button');b.className='bl';b.textContent=l;b.onclick=()=>{S.jogo=S.jogo||{};const j=S.jogo[id]=S.jogo[id]||{};j.op=v;j.hora=new Date().toTimeString().slice(0,5);sv();box.innerHTML='<p class="ctg">Anotado: '+l+'. Obrigado!</p>';fala('Anotado. Obrigado!');try{resumo()}catch(e){}};box.appendChild(b)});el.appendChild(box);return box}
+function balao(el){el.innerHTML='';S.jogo=S.jogo||{};const JJ=S.jogo.balao=S.jogo.balao||{};JJ.vezes=(JJ.vezes||0)+1;sv();const W=palavrasDia(),R=[];
+for(let i=0;i<4;i++){const d=2+Math.floor(Math.random()*8),u=Math.floor(Math.random()*10);const n=d*10+u,f=new Set([u*10+d,d+u,n+10,n-1].filter(x=>x!=n&&x>0&&x<100));const uu=u==1?'1 unidade':u+' unidades';R.push({p:`${d} dezenas e ${uu}`,s:`${d} dezenas e ${uu}`,c:String(n),e:[...f].slice(0,3).map(String)})}
+W.sort(()=>Math.random()-.5).slice(0,4).forEach(w=>{const e=erradas(w);if(e.length)R.push({p:`a palavra escrita certinho: “${w}”`,s:w,c:w,e:e.slice(0,3),ou:1})});
+R.sort(()=>Math.random()-.5);let r=0,pts=0,vivo=true,bs=[],t0=performance.now();
+el.innerHTML='<p style="margin:4px 0"><b>🎈 Estoura Balões!</b> Estoure o balão certo antes que ele voe embora.</p><p class="ctg alvo" style="color:#7e3c9e"></p><button class="ouv" style="margin:0 auto 6px;display:block">🔊 Ouvir de novo</button><div class="ceu" style="position:relative;height:320px;overflow:hidden;border-radius:12px;background:linear-gradient(#bfe3ff,#e8f6ff)"></div><p class="ctg pts">⭐ 0</p><button class="bn nq" style="font-size:17px;padding:8px">😕 Não gostei / não quero mais este jogo</button>';
+const ceu=el.querySelector('.ceu'),alvo=el.querySelector('.alvo'),ptsEl=el.querySelector('.pts');const COR=['#e53935','#fb8c00','#43a047','#1e88e5','#8e24aa','#f06292'];
+const diz=()=>{const q=R[r];fala(q.ou?'Estoure a palavra '+q.s+', escrita certinho.':'Estoure o número com '+q.s+'.')};el.querySelector('.ouv').onclick=diz;el.querySelector('.nq').onclick=()=>{vivo=false;ceu.innerHTML='';ceu.style.display='none';el.querySelector('.ouv').style.display='none';el.querySelector('.nq').remove();alvo.textContent='Tudo bem! Me conta:';if(!el.querySelector('.jfb'))jogoFb(el,'balao','Estoura Balões')};
+function rodada(){ceu.innerHTML='';bs=[];if(r>=R.length){vivo=false;ceu.innerHTML='<div style="font-size:60px;text-align:center;padding-top:80px">🎉🏆🎉</div>';alvo.textContent='Você fez '+pts+' estrelas!';fala('Parabéns! Você fez '+pts+' estrelas!');JJ.estrelas=Math.max(JJ.estrelas||0,pts);sv();const b=document.createElement('button');b.className='bl';b.textContent='🔁 Jogar de novo';b.onclick=()=>balao(el);el.appendChild(b);jogoFb(el,'balao','Estoura Balões');return}
+const q=R[r];alvo.textContent='Estoure: '+q.p;diz();const ops=[q.c,...q.e].sort(()=>Math.random()-.5),w=ceu.clientWidth||300,sl=w/ops.length;
+ops.forEach((t,i)=>{const b=document.createElement('div');b.textContent=t;b.style.cssText=`position:absolute;width:${Math.min(86,sl-6)}px;height:96px;border-radius:50% 50% 46% 46%;background:${COR[(i+r)%6]};color:#fff;font-weight:bold;font-size:${t.length>5?17:24}px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:inset -8px -10px 0 #0002;cursor:pointer;user-select:none;left:${i*sl+3}px`;b._y=330+Math.random()*90;b._v=.55+Math.random()*.35;b._f=Math.random()*6;b._x=i*sl+3;
+b.onpointerdown=()=>{if(b._fora)return;if(t==q.c){b._fora=1;b.textContent='💥';b.style.background='transparent';b.style.fontSize='48px';pts+=b._y>160?3:(b._y>40?2:1);ptsEl.textContent='⭐ '+pts;fala('Isso!');r++;setTimeout(rodada,700)}else{b.style.transform='rotate(-15deg)';b.style.opacity=.4;b._fora=1;fala('Esse não. Tenta outro!')}};ceu.appendChild(b);bs.push(b)})}
+function anda(){if(!vivo||!el.isConnected||!el.contains(ceu))return;bs.forEach(b=>{b._y-=b._v;if(b._y<-100){b._y=340;}b.style.top=b._y+'px';b.style.left=(b._x+Math.sin((performance.now()/600)+b._f)*6)+'px'});requestAnimationFrame(anda)}
+rodada();requestAnimationFrame(anda)}
+const mmss=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+function upd(){const st=!!S.ini;document.getElementById('cstart').className='card '+(st?'ok':'atual');let livre=st,cnt=0;const obrigOk=st&&B.every((b,k)=>b.op||(S.t['f'+k]&&S.t['p'+k]&&(S.t['sk'+k]||Date.now()-S.t['p'+k]>=(S.t['L'+k]||300)*1000)));
+B.forEach((b,k)=>{const d=document.getElementById('b'+k),f=!!S.t['f'+k],p=S.t['p'+k],pOk=p&&(S.t['sk'+k]||Date.now()-p>=(S.t['L'+k]||300)*1000);d.querySelector('.pausa').classList.toggle('on',!!(f&&p&&!pOk));{const sb=S.t['sob'+k]||0,bk=S.t['bk'+k]||0;d.querySelector('.ext').textContent=p&&(sb||bk)?'Pausa de 5:00'+(sb?' + '+mmss(sb)+' que sobrou do bloco':'')+(bk?' + '+mmss(bk)+' de pausa guardada (máx. 60 min)':'')+' = '+mmss(S.t['L'+k]):''}trava(d,k);{const pb=d.querySelector('.pk');pb.textContent=(S.bank||0)>0&&k<B.length-1?'⏭ Pular pausa (guardar o tempo) · Pausa guardada: '+mmss(S.bank)+' (máx. 60 min)'+(S.bank>=3600?' — já está no máximo':''):'⏭ Pular pausa (guardar o tempo, máx. 60 min)';}{const ci=d.querySelector('.cini'),fb=d.querySelector('.fimb');ci.disabled=!livre||!!S.t['i'+k];ci.textContent=S.t['i'+k]?'⏱ Cronômetro ligado':'▶ Começar cronômetro';fb.disabled=!S.t['i'+k]||f;fb.textContent=f?(S.t['auto'+k]?'⏰ Tempo acabou (25:00)':'✔ Cronômetro parado'):'■ Parar cronômetro (terminei o bloco)'}
+if(b.op){const oc=S.t['op'+k]||'',lv=obrigOk&&oc=='sim';{const ci=d.querySelector('.cini');ci.disabled=!lv||!!S.t['i'+k]}d.querySelector('.opsim').classList.toggle('hide',!!oc);d.querySelector('.opnao').classList.toggle('hide',!!oc);d.querySelector('.oppul').classList.toggle('hide',oc!='nao');d.className='card '+(d.dataset.pt?'pt ':'')+(!obrigOk?'lock':oc=='nao'?'ok pul esc':oc==''?'atual esc':(f&&pOk)?'ok':'atual');if(f)cnt++;return}
+d.className='card '+(d.dataset.pt?'pt ':'')+(!livre?'lock':(f&&pOk)?'ok':'atual');if(f)cnt++;if(!(f&&pOk))livre=false});
+document.getElementById('cont').textContent=cnt;const tudo=B.every((b,k)=>S.t['f'+k]||(b.op&&S.t['op'+k]=='nao'));document.getElementById('fim').classList.toggle('hide',!tudo);if(tudo)resumo()}
+function tick(){if(!S.ini)return;let ativo='--:--';B.forEach((b,k)=>{const i=S.t['i'+k];if(!i)return;if(!S.t['f'+k]&&Date.now()-i>=1500000)fimBloco(k,true);const end=S.t['f'+k]||Date.now();const r=1500-Math.floor((end-i)/1000);
+const el=document.getElementById('rb'+k);el.textContent=r>=0?mmss(r):'+'+mmss(-r);el.style.color=r<0?'#c0392b':'';if(!S.t['f'+k])ativo=el.textContent;
+const p=S.t['p'+k];if(p&&!S.t['sk'+k]){const rp=Math.max(0,(S.t['L'+k]||300)-Math.floor((Date.now()-p)/1000));document.getElementById('rp'+k).textContent=mmss(rp);if(!rp&&!S.t['pf'+k]){S.t['pf'+k]=1;sv();const db=document.getElementById('b'+k);if(db.querySelector('.jogo').innerHTML){fecha(db);alert('Acabou a pausa! O jogo fechou. Vamos para o próximo bloco.')}fala('Acabou a pausa. Pode começar o próximo bloco.');upd()}}});
+document.getElementById('crono').textContent=ativo}
+const fs=x=>S.f['foto_'+x]?'foto enviada, correção pendente':'foto não enviada';
+const FT_={};
+function fotoSel(id,inp){const fl=inp.files&&inp.files[0];if(!fl)return;const box=document.getElementById('fo_'+id),k=+box.dataset.k;const im=new Image(),u=URL.createObjectURL(fl);
+im.onload=()=>{let w=im.naturalWidth,h=im.naturalHeight;const m=Math.min(1,1600/Math.max(w,h));w=Math.round(w*m);h=Math.round(h*m);const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);URL.revokeObjectURL(u);
+const tenta=q=>c.toBlob(b=>{if(b.size>1500000&&q>.4)return tenta(q-.1);FT_[id]=new File([b],'escrita-'+HOJE+'-bloco-'+(k+1)+'-'+id+'.jpg',{type:'image/jpeg'});const pi=box.querySelector('img');pi.src=URL.createObjectURL(b);pi.classList.remove('hide');box.querySelector('.ef').classList.remove('hide');box.querySelector('.st').textContent='Foto pronta. Se dá para ler, aperte Enviar.'},'image/jpeg',q);tenta(.85)};
+im.onerror=()=>{box.querySelector('.st').textContent='Não consegui abrir a foto. Tente de novo.'};im.src=u}
+async function fotoEnv(id){const fl=FT_[id];if(!fl)return;const box=document.getElementById('fo_'+id),k=+box.dataset.k,lab=box.dataset.lab;
+const sub='Resultado estudos '+HOJE,txt=sub+'\nFOTO-ESCRITA bloco '+(k+1)+' '+lab+'\nPara: abnergonzales64@gmail.com';const st=box.querySelector('.st');let ok=false;
+if(navigator.canShare&&navigator.canShare({files:[fl]})){try{await navigator.share({files:[fl],title:sub,text:txt});ok=true}catch(e){if(e.name=='AbortError'){st.textContent='Envio cancelado. Aperte Enviar de novo.';return}}}
+if(!ok){const a=document.createElement('a');a.href=URL.createObjectURL(fl);a.download=fl.name;document.body.appendChild(a);a.click();a.remove();
+st.innerHTML='A foto foi salva no celular ('+fl.name+'). Abra o e-mail, mande para <b>abnergonzales64@gmail.com</b> com o assunto <b>'+sub+'</b>, escreva <b>FOTO-ESCRITA bloco '+(k+1)+' '+lab+'</b> e anexe a foto.';}
+else st.textContent='✔ Foto enviada! O papai vai corrigir.';S.f['foto_'+id]=Date.now();sv();box.dataset.ok=1;if(S.t['wf'+k]&&!fotoPend(k))iniPausa(k);else upd()}
+const cl=s=>String(s==null?'':s).replace(/[|\r\n]+/g,' ').trim();
+document.querySelectorAll('[data-c]').forEach(c=>{c.checked=!!(S.c||{})[c.dataset.c];c.onchange=()=>{S.c=S.c||{};S.c[c.dataset.c]=c.checked;sv();resumo()}});
+document.querySelectorAll('[data-x]').forEach(c=>{c.value=(S.x||{})[c.dataset.x]||'';c.oninput=()=>{S.x=S.x||{};S.x[c.dataset.x]=c.value;sv();resumo()}});
+function resumo(){const d=HOJE,f=S.f,C=S.c||{},X=S.x||{};const H=['AULAS-3H','Data: '+d],KV=['FORMATO=aula-v1','DATA='+d];
+ROT.forEach((r,i)=>{const ok=!!C['rot'+i];H.push((ok?'[x] ':'[ ] ')+r.t);KV.push('BLOCO='+cl(r.t)+'|ID='+r.id+'|STATUS='+(ok?'Feito':'Não feito')+'|MIN=|OBS=|FOTOS=0')});
+window.KVR={};B.forEach((b,k)=>{KVR[k]=[KV.length];const i=S.t['i'+k],e=S.t['f'+k];const a=(b.g||[]).map(g=>f['acertos_'+g]).filter(x=>x).join(' + ');let x=0,n=0;(b.g||[]).forEach(g=>{const v=f['acertos_'+g];if(v){const[p,q]=v.split('/').map(Number);x+=p;n+=q}});
+const ft=(ES[k]||[]).length?((ES[k].every(z=>f['foto_'+z]))?'sim':'não'):'';const de=cl(f['dit_erros'+k]||''),da=cl(f['dit_ac'+k]||'');
+const pai=C['pai'+k]?'sim':'não';
+if(!i||!e){H.push('Bloco '+(k+1)+' '+b.t+': '+(i?'começado, não terminado':'não feito'));}
+else{const sec=Math.round((e-i)/1000),pc=n?x/n:null;const rot=(S.t['auto'+k]||sec>1500)?'passou do tempo':(sec<900&&(pc===null||pc>=.8))?'rápido demais':'no tempo';
+H.push('Bloco '+(k+1)+' '+b.t.replace(':','')+': '+mmss(sec).padStart(5,'0')+' de 25:00, acertos '+(a||'sem correção')+', '+rot+(ft?', escrita: '+(ft=='sim'?'foto enviada, correção pendente':'foto não enviada'):'')+(b.dit?', ditado: acertos '+(da||'-')+', erros '+(de||'nenhum anotado'):'')+', pai conferiu: '+pai)}
+const st=e?'Feito':i?'Parcial':'Não feito',mn=i?Math.round(((e||Date.now())-i)/60000):'';
+KV.push('BLOCO='+cl(b.t)+'|ID='+b.id+'|NUM='+(k+1)+'|STATUS='+st+'|MIN='+mn+'|OBS='+cl([a?'acertos '+a:'',b.dit&&da?'ditado '+da:'',b.dit&&de?'erros do ditado: '+de:''].filter(z=>z).join('; '))+'|FOTOS='+(ft=='sim'?1:0));
+if(b.op){KV.push('OPCIONAL='+b.id+'|ESCOLHA='+(S.t['op'+k]=='nao'?'nao':S.t['op'+k]=='sim'?'sim':'sem resposta'));if(S.t['op'+k]=='nao')H.push('  (opcional pulado: não quis fazer)')}KV.push('ACERTOS='+b.id+'|BLOCO='+(k+1)+'|X='+(n?x:'')+'|N='+(n||''));
+if(b.dit)KV.push('DITADO=registro|MIN='+mn+'|ERROS='+de+'|PERGUNTAS='+da);
+if(ft)KV.push('FOTO='+b.id+'|BLOCO='+(k+1)+'|ENVIADA='+ft);
+KV.push('PAI='+b.id+'|CONFERIU='+pai);
+(b.pk||[]).forEach(p=>{const ok=!!C[p.c];H.push('  '+(ok?'[x] ':'[ ] ')+(p.kid=='pequena'?'Pequena':'Pequeno')+': '+p.t);KV.push('PQ='+p.kid+'|BLOCO='+b.id+'|ATIV='+cl(p.t)+'|QUEM=com o pai|FEITO='+(ok?'sim':'não'))});KVR[k].push(KV.length)});
+let gu=0,us=0;B.forEach((b,k)=>{gu+=S.t['gu'+k]||0;us+=S.t['bk'+k]||0});const PZ='PAUSAS: guardado ao pular '+mmss(gu)+', usado em pausas maiores '+mmss(us)+', sobrou no fim '+mmss(S.bank||0);H.push(PZ);
+KV.push('PAUSAS='+mmss(gu)+'|USADO='+mmss(us)+'|SOBROU='+mmss(S.bank||0));H.push('TEMPO LIVRE NO TABLET (jogo e desenho): usou '+mmss(Math.floor(S.tl||0))+', ganhou '+mmss(ganhoTela().g)+' (8 min por bloco terminado), máx. '+mmss((CFG.tela_max||60)*60)+((S.tl||0)>=(CFG.tela_max||60)*60?' (chegou no limite)':''));KV.push('TELALIVRE='+mmss(Math.floor(S.tl||0))+'|MAX='+mmss((CFG.tela_max||60)*60)+'|GANHO='+mmss(ganhoTela().g)+'|BLOCOS='+ganhoTela().n);
+const PK=B.flatMap(b=>b.pk||[]),cnt=kd=>{const a=PK.filter(p=>p.kid==kd);return a.filter(p=>C[p.c]).length+'/'+a.length};
+KV.push('PEQUENA=registro|LETRAS=|NOME=|LIVRO=|MIN=|FEITAS='+cnt('pequena')+'|OBS=|FOTOS=0');KV.push('PEQUENO=registro|ESTIM='+(()=>{const a=PK.filter(p=>p.kid=='pequeno'),d=a.filter(p=>C[p.c]).length;return !a.length?'':d==a.length?'Sim':d?'Parcial':'Não'})()+'|FEITAS='+cnt('pequeno')+'|OBS=');
+Object.entries(S.jogo||{}).forEach(([g,j])=>{KV.push('JOGO='+g+'|VEZES='+(j.vezes||0)+'|ESTRELAS='+(j.estrelas||'')+'|OPINIAO='+(j.op||''));H.push('Jogo da pausa ('+g+'): jogou '+(j.vezes||0)+' vez(es)'+(j.op?', opinião: '+j.op:''))});
+KV.push('GLORIA='+cl(X.gloria));KV.push('NOTA='+cl(X.nota));
+(window.RESX||[]).forEach(f=>{try{f(H,KV)}catch(e){}});window.KVALL=KV;const body=H.join('\n')+'\n\n'+KV.join('\n')+'\n';document.getElementById('rtxt').textContent=body;
+document.getElementById('env').onclick=()=>location.href='mailto:abnergonzales64@gmail.com?subject='+encodeURIComponent('Resultado estudos '+d)+'&body='+encodeURIComponent(body);
+document.getElementById('cop').onclick=async()=>{try{await navigator.clipboard.writeText(body);alert('Resumo copiado.')}catch(e){prompt('Copie:',body)}};return body}
+document.getElementById('go').onclick=()=>{if(!S.ini){S.ini=Date.now();sv()}upd();fala('Vamos começar. Bloco 1, '+B[0].t.split(':')[0]+'.');document.getElementById('b0').scrollIntoView({behavior:'smooth'})};
+document.querySelectorAll('.foto').forEach(b=>{if(S.f['foto_'+b.id.slice(3)])b.querySelector('.st').textContent='✔ Foto já enviada hoje. Correção pendente.'});setInterval(tick,500);setInterval(upd,5000);upd();tick();
+</script>
+<!-- estilo v2 (aprovado 30/10) -->
+<style>
+/* estilo v2: padrão visual da Revisão CC (29/10) */
+#barra{background:#1d4e89;font-size:19px;padding:10px 8px;box-shadow:0 2px 6px #0003}
+h1{font-size:30px}
+.card{border:4px solid #ffb300;border-radius:20px;padding:18px;opacity:1}
+.card.lock{border-color:#ccc}.card.ok{border-color:#4caf50}
+.card>h2,.card.pt>h2{font-size:32px;text-align:center;color:#1d4e89!important;margin:8px 0 2px;line-height:1.15}
+.card>h2 .min{float:none;display:block;font-size:17px;color:#777;margin-top:4px}
+.sub2{text-align:center;font-size:22px;color:#444;margin:2px 0 10px}
+.fig{font-size:56px;text-align:center;line-height:1.1;margin:4px 0}
+.inst{position:relative;padding-right:12px}
+.ouv{display:block;width:100%!important;background:#ff9800!important;color:#fff;font-size:30px!important;padding:12px!important;margin:8px 0 0!important;border-radius:12px;font-weight:bold;box-shadow:0 4px 0 #b26a00}
+button{font-size:24px;padding:16px;border-radius:14px}
+.bl{background:#7e57c2;font-size:24px}.bg{background:#4caf50;font-size:24px}
+button.bver{background:#1d4e89!important;color:#fff;font-weight:bold}
+.txt{background:#eef4fb;font-size:22px}
+.it{border:3px solid #e57373;border-radius:14px;padding:12px;background:#fff;font-size:24px;font-weight:600}
+.it input{font-size:24px;width:120px}
+.feitob{background:#eaf7ea;border-radius:12px;padding:8px 12px;margin-top:12px}
+.feitob label{font-size:26px;font-weight:bold;color:#1b5e20}.feitob input[type=checkbox]{width:42px;height:42px}
+.tacab{background:#c0392b;color:#fff;border:0}.tacab p{color:#fff}
+.relo{font-size:46px}
+</style>
+<script>
+(function(){
+var FIG=[[/portugu/i,'📖✏️'],[/matem/i,'🔢➕'],[/\bcc\b|foundations/i,'🎵🌎'],[/canto/i,'🎤🎶'],[/desenho/i,'🎨🖍️'],[/exerc|f[ií]sic/i,'🏃‍♀️⚽'],[/leitura/i,'📚']];
+B.forEach(function(b,k){var d=document.getElementById('b'+k);if(!d)return;var h=d.querySelector('h2');if(!h)return;
+ var t=b.t,i=t.indexOf(':'),mat=(i>0?t.slice(0,i):t).trim(),sub=i>0?t.slice(i+1).trim():'';
+ var mn=h.querySelector('.min');h.textContent=mat+' – Bloco '+(k+1);if(mn)h.appendChild(mn);
+ var f='📝';FIG.forEach(function(x){if(x[0].test(t)&&f=='📝')f=x[1]});
+ var fg=document.createElement('div');fg.className='fig';fg.textContent=f;h.parentNode.insertBefore(fg,h);
+ if(sub){var s=document.createElement('p');s.className='sub2';s.textContent=sub.charAt(0).toUpperCase()+sub.slice(1);h.after(s)}
+ var fa=d.querySelector('.fimat');if(fa){var w=document.createElement('div');w.className='pai feitob';w.innerHTML='<label><input type="checkbox" data-c="feito'+k+'"> ✅ Feito</label>';fa.before(w);
+  var c=w.querySelector('input');c.checked=!!(S.c||{})[c.dataset.c];c.onchange=function(){S.c=S.c||{};S.c[c.dataset.c]=c.checked;sv();try{resumo()}catch(e){}}}
+ d.querySelectorAll('button').forEach(function(x){if(/gabarito/i.test(x.textContent)){x.classList.add('bver');x.textContent='👁 Mostrar / esconder a resposta'}});
+ d.querySelectorAll('.ouv').forEach(function(x){if(x.textContent.trim()=='🔊')x.textContent='🔊 Ouvir'});
+});
+document.querySelectorAll('main>.inst .ouv').forEach(function(x){x.textContent='🔊 Ouvir'});
+var br=document.getElementById('barra');if(br&&!document.getElementById('bini')){br.innerHTML=br.innerHTML.replace('Blocos:','Blocos feitos:').replace('· ⏱','· Início: <span id="bini">–</span> · ⏱');}
+function ini(){var e=document.getElementById('bini');if(e&&S.ini){var d=new Date(S.ini);e.textContent=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}}
+ini();setInterval(ini,2000);
+})();
+</script>
+
+<!-- trava do Feito + jogos de canto (30/10) -->
+<style>
+.feitob.trv0 label{color:#888}.feitob.trv0{background:#eee}.feitob input:disabled{filter:grayscale(1);opacity:.5}
+.perg{background:#fff;border:3px solid #e57373;border-radius:14px;padding:10px;margin-top:12px}
+.perg p{font-size:24px;font-weight:bold;text-align:center;margin:4px 0 8px}
+.perg button{background:#fff3e0;color:#222;font-size:28px;border:3px solid #ffb300;font-weight:bold}
+.perg button.ok{background:#c8f7c5;border-color:#4caf50}.perg button.no{background:#fde2e2;border-color:#e57373}
+</style>
+<script>
+/* Trava do "Feito" (30/10): só libera com interação real + perguntinha fácil. */
+(function(){
+S.lib=S.lib||{};S.perg=S.perg||{};
+var curB=null,MAT=[['🔢','Matemática',/matem/i],['📖','Português',/portugu/i],['🎵','CC',/\bcc\b|foundations/i],['🎤','Canto',/canto/i],['🎨','Desenho',/desenho/i],['🏃','Exercício',/exerc/i],['🇺🇸','Inglês',/ingl|idioma/i],['📚','Leitura',/leitura/i]];
+function blk(el){var d=el&&el.closest&&el.closest('[id^=b]');return d&&/^b\d+$/.test(d.id)?+d.id.slice(1):null}
+document.addEventListener('pointerdown',function(e){var k=blk(e.target);if(k!=null)curB=k},true);
+document.addEventListener('click',function(e){var k=blk(e.target);if(k!=null)curB=k},true);
+function tipo(k){var d=document.getElementById('b'+k);if(!d)return 'audio';
+ if(d.querySelector('.canto2')||d.querySelector('.ingl'))return 'jogo';if(d.querySelector('iframe'))return 'cc';
+ if([].some.call(d.querySelectorAll('button'),function(b){return /^▶ Ouvir (\d+|frase)/.test(b.textContent.trim())}))return 'ditado';
+ if([].some.call(d.querySelectorAll('button'),function(b){return /Corrigir/.test(b.textContent)}))return 'corrigir';
+ if(d.querySelector('input[type=file]'))return 'audio/foto';return 'audio'}
+function precisa(k,m){var t=tipo(k);if(t=='audio/foto')return m=='audio'||m=='foto';return t==m||(t=='audio'&&m=='audio')}
+window.feitoLib=function(k,m){if(k==null||!precisa(k,m))return;if(!S.lib[k]){S.lib[k]={m:m,h:new Date().toTimeString().slice(0,5)};sv();aplica()}};
+// áudio: >=60% ou até o fim
+var _p=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){var a=this,k=curB;if(k!=null&&!a.__fl){a.__fl=1;var f=function(){if(a.ended||(a.duration&&a.currentTime/a.duration>=.6)){feitoLib(a.__k,'audio')}};a.addEventListener('timeupdate',f);a.addEventListener('ended',f)}a.__k=k;return _p.apply(this,arguments)};
+try{var _s=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=function(u){var k=curB;try{u.addEventListener('end',function(){setTimeout(function(){if(!speechSynthesis.speaking&&!speechSynthesis.pending)feitoLib(k,'audio')},300)})}catch(e){}return _s(u)}}catch(e){}
+// ditado: todas as palavras/frases tocadas
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b)return;var k=blk(b);if(k==null)return;var t=b.textContent.trim();
+ if(/^▶ Ouvir (\d+|frase)/.test(t)){b.dataset.tocou=1;var d=document.getElementById('b'+k),all=[].filter.call(d.querySelectorAll('button'),function(x){return /^▶ Ouvir (\d+|frase)/.test(x.textContent.trim())});if(all.every(function(x){return x.dataset.tocou}))feitoLib(k,'ditado')}
+ if(/Corrigir/.test(t)){var box=b.parentNode,ins=[].slice.call((box.closest('.it')||box).querySelectorAll('input[type=text]'));if(!ins.length)ins=[].slice.call(document.getElementById('b'+k).querySelectorAll('input[type=text]'));if(ins.some(function(i){return i.value.trim()}))feitoLib(k,'corrigir')}},true);
+document.addEventListener('change',function(e){if(e.target.type=='file'&&e.target.files&&e.target.files.length)feitoLib(blk(e.target),'foto')},true);
+window.addEventListener('message',function(e){var m=e.data||{};if(m.ccfeito){var fr=[].find.call(document.querySelectorAll('iframe'),function(f){return f.contentWindow===e.source});var k=blk(fr);S.ccf=S.ccf||{};S.ccf[m.ccfeito]=m.motivo||'musica';sv();feitoLib(k,'cc');try{resumo()}catch(x){}}});
+// perguntinha fácil por atividade
+B.forEach(function(b,k){var d=document.getElementById('b'+k);if(!d)return;var fb=d.querySelector('.feitob');if(!fb)return;
+ var me=MAT.find(function(x){return x[2].test(b.t)})||['⭐','esta atividade',/x/];
+ var outras=MAT.filter(function(x){return x!==me&&x[1]!='Exercício'&&x[1]!='Leitura'}).sort(function(){return Math.random()-.5}).slice(0,2);
+ var ops=[me].concat(outras).sort(function(){return Math.random()-.5});
+ var p=document.createElement('div');p.className='perg';p.innerHTML='<p>👀 Toque: qual atividade é esta?</p>';
+ ops.forEach(function(o){var bt=document.createElement('button');bt.type='button';bt.textContent=o[0]+' '+o[1];bt.onclick=function(){var r=S.perg[k]=S.perg[k]||{t:0};r.t++;if(o===me){r.ok=1;bt.classList.add('ok');try{fala('Isso!')}catch(e){}}else{bt.classList.add('no');try{fala('Tente de novo.')}catch(e){}}sv();aplica();try{resumo()}catch(e){}};if(S.perg[k]&&S.perg[k].ok&&o===me)bt.classList.add('ok');p.appendChild(bt)});
+ fb.before(p)});
+function aplica(){B.forEach(function(b,k){var d=document.getElementById('b'+k);if(!d)return;var c=d.querySelector('.feitob input'),lb=d.querySelector('.feitob label');if(!c)return;
+ var ok=!!S.lib[k]&&!!(S.perg[k]&&S.perg[k].ok);c.disabled=!ok;d.querySelector('.feitob').classList.toggle('trv0',!ok);
+ if(!ok&&c.checked){c.checked=false;S.c=S.c||{};S.c[c.dataset.c]=false;sv()}
+ var sp=lb.querySelector('.ftx');if(!sp){sp=document.createElement('span');sp.className='ftx';lb.lastChild.textContent='';lb.appendChild(sp)}
+ sp.textContent=ok?' ✅ Feito':(!S.lib[k]?' 🔒 Faça a atividade para liberar':' 🔒 Responda a perguntinha 👀 para liberar')})}
+document.addEventListener('change',function(e){var c=e.target;if(c.closest&&c.closest('.feitob')){var k=blk(c);if(!(S.lib[k]&&S.perg[k]&&S.perg[k].ok)){c.checked=false;aplica()}}},true);
+document.addEventListener('visibilitychange',aplica);window.addEventListener('pageshow',aplica);window.addEventListener('storage',aplica);
+window.RESX=window.RESX||[];RESX.push(function(H,KV){B.forEach(function(b,k){var c=(S.c||{})['feito'+k],l=S.lib[k],p=S.perg[k]||{};
+ var fh=(S.fh||{})[k],ti=S.t['i'+k];KV.push('FEITO='+b.id+'|BLOCO='+(k+1)+'|MARCADO='+(c?'sim':'não')+'|LIBERADO='+(l?'sim':'não')+'|POR='+(l?l.m+' '+l.h:'')+'|SEG='+(c&&fh&&ti?Math.round((fh-ti)/1000):''));
+ KV.push('PERG='+b.id+'|BLOCO='+(k+1)+'|OK='+(p.ok?'sim':'não')+'|TENTATIVAS='+(p.t||0));
+ H.push('Bloco '+(k+1)+': Feito '+(c?'marcado':'não marcado')+(l?' (liberado por '+l.m+' às '+l.h+')':' (não liberado: sem interação)')+'; perguntinha: '+(p.ok?'acertou':'não respondeu')+(p.t?' ('+p.t+' toque'+(p.t>1?'s':'')+')':''))});
+ Object.keys(S.ccf||{}).forEach(function(x){KV.push('CCFEITO='+x+'|LIBERADO='+S.ccf[x])})});
+aplica();try{resumo()}catch(e){}
+})();
+</script>
+<style>
+.canto2 .cj{background:#fff;border:4px solid #ffb300;border-radius:18px;padding:14px;margin:14px 0}
+.canto2 h3{font-size:28px;color:#1d4e89;text-align:center;margin:4px 0}
+.canto2 .placar{position:sticky;top:52px;z-index:1;background:#fff8e1;border:3px solid #ffb300;border-radius:14px;text-align:center;font-size:28px;font-weight:bold;padding:6px}
+.canto2 .op{background:#fff;color:#222;border:3px solid #7e57c2;font-size:22px;font-weight:bold;text-align:left}
+.canto2 .op.ok{background:#c8f7c5;border-color:#4caf50}.canto2 .op.no{background:#fde2e2;border-color:#e57373}
+.canto2 .tambor{font-size:110px;background:#ffe0b2;border:6px solid #ff9800;border-radius:50%;width:220px;height:220px;display:block;margin:10px auto;padding:0;touch-action:manipulation}
+.canto2 .tambor.bate{transform:scale(.93);background:#ffcc80}
+.canto2 .msg{font-size:26px;text-align:center;font-weight:bold;min-height:34px}
+.canto2 .kl{font-size:24px;padding:6px 10px;border-radius:10px;color:#999;margin:4px 0}.canto2 .kl.on{background:#fff59d;color:#222;font-weight:bold;font-size:28px}
+.canto2 .vu{height:24px;background:#eee;border-radius:12px;overflow:hidden}.canto2 .vu i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4caf50,#ffb300,#e53935)}
+.canto2 .conf{position:fixed;font-size:34px;pointer-events:none;z-index:9;animation:cf 1.2s ease-out forwards}
+@keyframes cf{to{transform:translateY(-260px) rotate(360deg);opacity:0}}
+.canto2 .est button{font-size:40px;background:#fff;border:3px solid #ffb300;width:31%;display:inline-block;margin:1%}
+</style>
+<script>
+/* Aula de canto em 3 jogos (30/10). Músicas: SÓ as do CC sem. 15–21 que já estão na cc-revisao-v2 (CANTO = matéria/título/letra; áudio lido do mesmo arquivo). */
+(function(){
+var el=document.querySelector('.canto2');if(!el||typeof CANTO=='undefined')return;
+var k=blk0(el);function blk0(x){var d=x.closest('[id^=b]');return d?+d.id.slice(1):null}
+S.canto=S.canto||{a:0,ar:0,r:0,rr:0,ka:'',ke:0,km:''};var C=S.canto,MU={},cur=null;
+function est(){return (C.a||0)+(C.r||0)+(C.ke||0)+(C.kmic||0)}
+function placar(){el.querySelector('.placar').textContent='⭐ Estrelas: '+est();sv();try{resumo()}catch(e){}}
+function confete(b){var r=b.getBoundingClientRect();for(var i=0;i<12;i++){var s=document.createElement('span');s.className='conf';s.textContent=['🎉','⭐','✨','🎊'][i%4];s.style.left=(r.left+Math.random()*r.width)+'px';s.style.top=(r.top)+'px';el.appendChild(s);setTimeout(function(x){x.remove()}.bind(null,s),1300)}}
+function para(){if(cur){cur.pause();cur=null}}
+function toca(key,ini,seg){para();if(!MU[key])return null;var a=new Audio(MU[key]);cur=a;a.play().catch(function(){});if(seg)setTimeout(function(){if(cur===a)a.pause()},seg*1000);return a}
+function nome(s){return s.fig+' '+s.mat+(s.tit?' – '+(s.tit.length>40?s.tit.slice(0,38)+'…':s.tit):'')}
+el.innerHTML='<div class="placar">⭐ Estrelas: 0</div><p class="msg cmsg">⏳ Carregando as músicas do CC…</p>'+
+'<div class="cj g1"><div class="fig">🎧</div><h3>1. Adivinhe a música</h3><p class="sub2">Escute um pedacinho e toque na música certa. 6 rodadas.</p><button class="bg g1go">▶ Começar</button><div class="g1b"></div></div>'+
+'<div class="cj g2"><div class="fig">🥁</div><h3>2. Siga o ritmo</h3><p class="sub2">Escute as batidas e depois bata no tambor do mesmo jeito. Fica mais difícil a cada rodada.</p><button class="bg g2go">▶ Começar</button><div class="g2b"></div></div>'+
+'<div class="cj g3"><div class="fig">🎤</div><h3>3. Karaokê com estrelas</h3><p class="sub2">Escolha uma música, leia a letra que acende e cante junto.</p><div class="g3b"></div></div>'+
+'<div class="cj g4"><h3>O que você achou dos jogos de canto?</h3><div class="g4b"></div></div>';
+placar();
+fetch('cc-revisao-v2.html').then(function(r){return r.text()}).then(function(t){
+ var m=t.match(/var MU=\{([^}]*)\}/);var segs=[m?m[1]:''];t.replace(/Object\.assign\(MU,\{([^}]*)\}\)/g,function(_,x){segs.push(x)});
+ segs.forEach(function(x){x.replace(/"([A-Z]?\d\d)":\s*"(data:audio[^"]+)"/g,function(_,a,b){MU[a]=b})});
+ var n=CANTO.filter(function(s){return MU[s.k]}).length;el.querySelector('.cmsg').textContent=n?'🎵 '+n+' músicas do CC prontas!':'Não consegui carregar as músicas. Chame o papai.';karaoke()}).catch(function(){el.querySelector('.cmsg').textContent='Não consegui carregar as músicas. Chame o papai.'});
+function pool(){return CANTO.filter(function(s){return MU[s.k]})}
+/* 1. Adivinhe */
+el.querySelector('.g1go').onclick=function(){var P=pool();if(!P.length)return;var box=el.querySelector('.g1b'),r=0,ac=0;C.a=C.a||0;
+ var R=P.slice().sort(function(){return Math.random()-.5}).slice(0,6);
+ function rod(){if(r>=R.length){C.ar=Math.max(C.ar||0,ac);C.ad=ac;placar();box.innerHTML='<p class="msg">🎉 Você acertou '+ac+' de '+R.length+'!</p>';feitoLib(k,'jogo');return}
+  var s=R[r],ops=[s].concat(P.filter(function(x){return x.mat!=s.mat}).sort(function(){return Math.random()-.5}).slice(0,2)).sort(function(){return Math.random()-.5});
+  box.innerHTML='<p class="msg">Rodada '+(r+1)+' de '+R.length+'</p><button class="ouv g1ouv">🔊 Ouvir o pedacinho</button>';
+  box.querySelector('.g1ouv').onclick=function(){toca(s.k,0,7)};toca(s.k,0,7);var feito=false;
+  ops.forEach(function(o){var b=document.createElement('button');b.className='op';b.textContent=nome(o);b.onclick=function(){if(feito)return;feito=true;para();
+   if(o===s){b.classList.add('ok');ac++;C.a=(C.a||0)+1;confete(b);placar();try{fala('Acertou!')}catch(e){}}else{b.classList.add('no');[].forEach.call(box.querySelectorAll('.op'),function(x){if(x.textContent==nome(s))x.classList.add('ok')});try{fala('Era a outra. Vamos para a próxima!')}catch(e){}}
+   setTimeout(function(){r++;rod()},1600)};box.appendChild(b)})}
+ rod()};
+/* 2. Ritmo (WebAudio) */
+var AC=null;function bum(t,f){var o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.setValueAtTime(f||180,t);o.frequency.exponentialRampToValueAtTime(60,t+.15);g.gain.setValueAtTime(.9,t);g.gain.exponentialRampToValueAtTime(.01,t+.18);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.2)}
+el.querySelector('.g2go').onclick=function(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){return}
+ var box=el.querySelector('.g2b'),r=0,tot=0,PAT=[[0,600,1200],[0,400,800],[0,600,900,1200],[0,300,600,1200],[0,400,600,800,1200]];
+ if(Math.random()<.5)PAT.push([0,300,600,900,1200,1500]);var NR=PAT.length;
+ function rod(){if(r>=NR){C.rr=NR*3;C.r=Math.max(C.r||0,tot);C.rt=tot;placar();box.innerHTML='<p class="msg">🎉 Ritmo: '+tot+' de '+(NR*3)+' estrelas!</p>';feitoLib(k,'jogo');return}
+  var p=PAT[r];box.innerHTML='<p class="msg">Rodada '+(r+1)+' de '+NR+': '+p.length+' batidas</p><button class="ouv g2ouv">🔊 Ouvir as batidas</button><button class="tambor" disabled>🥁</button><p class="msg g2m">Escute…</p>';
+  var tb=box.querySelector('.tambor'),m=box.querySelector('.g2m'),taps=[];
+  function ouvir(){tb.disabled=true;m.textContent='Escute…';taps=[];var t0=AC.currentTime+.2;p.forEach(function(x){bum(t0+x/1000)});setTimeout(function(){tb.disabled=false;m.textContent='Agora você! Bata '+p.length+' vezes.'},p[p.length-1]+600)}
+  box.querySelector('.g2ouv').onclick=ouvir;ouvir();
+  tb.onpointerdown=function(e){e.preventDefault();if(tb.disabled)return;bum(AC.currentTime,220);tb.classList.add('bate');setTimeout(function(){tb.classList.remove('bate')},90);taps.push(performance.now());
+   if(taps.length==p.length){tb.disabled=true;var er=0;for(var i=1;i<p.length;i++){var a=p[i]-p[i-1],b=taps[i]-taps[i-1];er+=Math.abs(b-a)/a}er/=p.length-1;
+    var e=er<.25?3:er<.45?2:1;tot+=e;placar();m.textContent='⭐'.repeat(e)+(e==3?' Perfeito!':e==2?' Muito bem!':' Boa! Vamos treinar mais.');if(e==3)confete(tb);setTimeout(function(){r++;rod()},1800)}}}
+ rod()};
+/* 3. Karaokê */
+function karaoke(){var box=el.querySelector('.g3b'),P=pool().filter(function(s){return s.letra&&s.letra.indexOf('ainda não')<0});if(!P.length){box.innerHTML='<p>Sem letras disponíveis.</p>';return}
+ var esc=P.sort(function(){return Math.random()-.5}).slice(0,3);box.innerHTML='<p class="msg">Escolha a música:</p>';
+ esc.forEach(function(s){var b=document.createElement('button');b.className='op';b.textContent=nome(s);b.onclick=function(){canta(s)};box.appendChild(b)});
+ function canta(s){var L=s.letra.split('\n').filter(function(x){return x.trim()});box.innerHTML='<p class="msg">'+s.fig+' '+s.mat+'</p><button class="bg kmic">🎤 Ligar microfone (opcional)</button><div class="vu hide"><i></i></div><div class="kls"></div><button class="bg kgo">🎵 Tocar e cantar</button><button class="bn kstop">■ Parar</button><div class="kfim"></div>';
+  var kls=box.querySelector('.kls');L.forEach(function(x){var p=document.createElement('p');p.className='kl';p.textContent=x;kls.appendChild(p)});
+  var an=null,alto=0,amost=0,vu=box.querySelector('.vu i'),raf=0;
+  box.querySelector('.kmic').onclick=function(){var bt=this;if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){bt.textContent='Sem microfone: tudo bem, cante assim mesmo!';return}
+   navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){AC=AC||new (window.AudioContext||window.webkitAudioContext)();var src=AC.createMediaStreamSource(st);an=AC.createAnalyser();an.fftSize=512;src.connect(an);box.querySelector('.vu').classList.remove('hide');bt.textContent='🎤 Microfone ligado';bt.disabled=true}).catch(function(){bt.textContent='Microfone não liberado: tudo bem, cante assim mesmo!'})};
+  box.querySelector('.kstop').onclick=function(){para()};
+  box.querySelector('.kgo').onclick=function(){var a=toca(s.k);if(!a)return;alto=0;amost=0;var d=new Uint8Array(512);
+   function loop(){if(a.duration){var i=Math.min(L.length-1,Math.floor(a.currentTime/a.duration*L.length));[].forEach.call(kls.children,function(p,j){p.classList.toggle('on',j==i)});var on=kls.children[i];if(on&&on.scrollIntoView&&a.currentTime>0.3)on.scrollIntoView({block:'center',behavior:'smooth'})}
+    if(an){an.getByteTimeDomainData(d);var q=0;for(var j=0;j<d.length;j++){var v=(d[j]-128)/128;q+=v*v}q=Math.sqrt(q/d.length);vu.style.width=Math.min(100,q*400)+'%';amost++;if(q>.08)alto++}
+    if(!a.paused&&!a.ended)raf=requestAnimationFrame(loop)}loop();
+   a.addEventListener('ended',function(){var mic=an&&amost?(alto/amost>.4?3:alto/amost>.2?2:1):0;C.kmic=Math.max(C.kmic||0,mic);C.ka=s.mat+' '+s.sem;placar();
+    var f=box.querySelector('.kfim');f.innerHTML=(an?'<p class="msg">🎤 Microfone: '+'⭐'.repeat(mic)+'</p>':'')+'<p class="msg">Como você acha que cantou?</p><div class="est"></div>';
+    [1,2,3].forEach(function(n){var b=document.createElement('button');b.textContent='⭐'.repeat(n);b.onclick=function(){C.ke=Math.max(C.ke||0,n);C.kself=n;placar();confete(b);f.innerHTML='<p class="msg">'+'⭐'.repeat(n)+' Obrigada! Que linda voz para louvar a Deus!</p><button class="bl kde">🔁 Cantar outra</button>';f.querySelector('.kde').onclick=karaoke;feitoLib(k,'jogo')};f.querySelector('.est').appendChild(b)})})}}}
+var fbbox=el.querySelector('.g4b');jogoFb(fbbox,'canto-jogos','jogos de canto');
+window.RESX.push(function(H,KV){var c=S.canto||{};KV.push('CANTO=ESTRELAS='+est()+'|ADIVINHE='+(c.ad!=null?c.ad:'-')+'/6|RITMO='+(c.rt!=null?c.rt+'/'+(c.rr||15):'-')+'|KARAOKE='+(c.ka?c.ka+' auto='+(c.kself||0)+' mic='+(c.kmic||0):'-'));
+ H.push('Canto (jogos): '+est()+' estrelas; adivinhe '+(c.ad!=null?c.ad:'-')+'/6; ritmo '+(c.rt!=null?c.rt:'-')+'; karaokê '+(c.ka||'não fez'))});
+try{resumo()}catch(e){}
+})();
+</script>
+<script>/* Jogo de inglês (31/10) */
+(function(){function en(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';var v=speechSynthesis.getVoices().find(function(x){return /^en[-_]US/i.test(x.lang)});if(v)u.voice=v;u.rate=.8;speechSynthesis.speak(u)}catch(e){}}
+document.querySelectorAll('.ingl').forEach(function(el){var W=JSON.parse(el.dataset.w),d=el.closest('[id^=b]'),k=+d.id.slice(1);
+var h='<div class="cj" style="background:#fff;border:4px solid #ffb300;border-radius:18px;padding:12px"><h3 style="text-align:center;color:#1d4e89">🔊 1) Ouça e repita cada palavra</h3>';
+W.forEach(function(w){h+='<button type="button" class="bl ienw" data-t="'+w[1]+'" style="font-size:26px">'+w[0]+' <b>'+w[1]+'</b> 🔊</button>'});
+h+='</div><div class="cj" style="background:#fff;border:4px solid #7e57c2;border-radius:18px;padding:12px;margin-top:12px"><h3 style="text-align:center;color:#1d4e89">🎯 2) Jogo: toque na figura certa</h3><button type="button" class="bg iini">▶ Começar o jogo</button><p class="imsg" style="font-size:26px;text-align:center;font-weight:bold"></p><div class="igr" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div></div>';
+el.innerHTML=h;el.querySelectorAll('.ienw').forEach(function(b){b.onclick=function(){en(b.dataset.t)}});
+var msg=el.querySelector('.imsg'),gr=el.querySelector('.igr'),ord=[],i=0,pts=0;
+function rod(){if(i>=ord.length){msg.textContent='🎉 Você fez '+pts+' de '+ord.length+' ⭐!';gr.innerHTML='';S.jogo=S.jogo||{};var jj=S.jogo.ingles=S.jogo.ingles||{vezes:0};jj.vezes++;jj.estrelas=pts+'/'+ord.length;sv();try{resumo()}catch(e){}if(window.feitoLib)feitoLib(k,'jogo');try{fala('Parabéns!')}catch(e){}return}
+var w=ord[i];msg.textContent='Ouça e toque: 🔊';en(w[1]);var r=document.createElement('button');r.type='button';r.className='bn';r.textContent='🔊 Ouvir de novo';r.style.gridColumn='1/4';r.onclick=function(){en(w[1])};gr.innerHTML='';gr.appendChild(r);var errou=0;
+W.slice().sort(function(){return Math.random()-.5}).forEach(function(o){var b=document.createElement('button');b.type='button';b.textContent=o[0];b.style.cssText='font-size:56px;height:100px;background:#fff;border:3px solid #1d4e89;border-radius:14px;margin:0';b.onclick=function(){if(o===w){if(!errou)pts++;b.style.background='#c8f7c5';msg.textContent='✅ '+w[1]+'!';i++;setTimeout(rod,900)}else{errou=1;b.style.background='#fde2e2';en(w[1])}};gr.appendChild(b)})}
+el.querySelector('.iini').onclick=function(){ord=W.slice().sort(function(){return Math.random()-.5});i=0;pts=0;rod()}})})();</script>
+<script>
+/* 03/11/2026: salva e envia o resultado de CADA bloco ao terminar (Feito / fim do cronômetro). */
+(function(){S.envB=S.envB||{};S.fh=S.fh||{};
+RESX.push(function(H,KV){var C=S.c||{},X=S.x||{};KV.push('PAICONF='+(C.paidia?'sim':'não')+'|HORA='+(S.paidiaH||''));KV.push('FORA='+cl(X.fora));H.push('Pai conferiu o dia: '+(C.paidia?'sim':'não')+(X.fora?' · Fora da página: '+cl(X.fora):''))});
+function linhas(k){resumo();var r=KVR[k]||[0,0],L=KVALL.slice(r[0],r[1]),re=new RegExp('^(FEITO|PERG|CORRIGIDAS|ITENS)=[^|]*\\|BLOCO='+(k+1)+'\\|');KVALL.forEach(function(x){if(re.test(x))L.push(x)});return L}
+function corpo(k){var b=B[k],L=linhas(k),i=S.t['i'+k],fh=S.fh[k];
+ var h='BLOCO '+(k+1)+' – '+b.t+' (envio do bloco; o resumo final vem depois)';
+ return h+'\n\n'+['FORMATO=aula-bloco-v1','DATA='+HOJE,'BLOCOENV='+(k+1)+'|ID='+b.id+'|HORA='+new Date().toTimeString().slice(0,5)+'|FEITOSEG='+(fh&&i?Math.round((fh-i)/1000):'')].concat(L).join('\n')+'\n'}
+function caixa(k){var d=document.getElementById('b'+k);if(!d)return null;var e=d.querySelector('.envb');if(!e){e=document.createElement('div');e.className='envb';e.style.cssText='background:#e3f2fd;border-radius:12px;padding:8px 12px;margin-top:10px;font-size:19px';
+ e.innerHTML='<p class="est" style="margin:4px 0;font-weight:bold;color:#1d4e89"></p><button class="bg reenv">📧 Enviar resultado deste bloco</button>';var p=d.querySelector('.pai:not(.feitob)');p?p.before(e):d.querySelector('.fimb').after(e);e.querySelector('.reenv').onclick=function(){envia(k,true)}}return e}
+function marca(k){var e=S.envB[k];var c=caixa(k);if(!c)return;c.classList.toggle('hide',!e);if(e)c.querySelector('.est').textContent=(e.env?'✔ Resultado do bloco '+(k+1)+' enviado às '+e.env:'💾 Resultado do bloco '+(k+1)+' salvo às '+e.h+'. Aperte para enviar.')}
+function salva(k){S.envB[k]=Object.assign(S.envB[k]||{},{h:new Date().toTimeString().slice(0,5),body:corpo(k)});sv();marca(k)}
+function envia(k,gesto){salva(k);var e=S.envB[k];if(!gesto&&e.env)return;e.env=new Date().toTimeString().slice(0,5);sv();marca(k);
+ location.href='mailto:abnergonzales64@gmail.com?subject='+encodeURIComponent('Resultado estudos '+HOJE+' bloco '+(k+1))+'&body='+encodeURIComponent(e.body)}
+window.enviaBloco=envia;
+document.addEventListener('change',function(e){var c=e.target;if(!(c.closest&&c.closest('.feitob'))||!c.checked)return;var d=c.closest('[id^=b]'),k=+d.id.slice(1);setTimeout(function(){if(!c.checked)return;S.fh[k]=S.fh[k]||Date.now();sv();envia(k,false)},50)});
+document.addEventListener('change',function(e){if(e.target.dataset&&e.target.dataset.c=='paidia'){S.paidiaH=e.target.checked?new Date().toTimeString().slice(0,5):'';sv();resumo()}});
+var _fb=fimBloco;fimBloco=function(k,auto){var j=!S.t['f'+k];_fb(k,auto);if(j&&S.t['f'+k]){if(auto)salva(k);else envia(k,false)}};
+B.forEach(function(b,k){marca(k)});})();
+</script>
+<script>
+/* Tempo livre no tablet (jogo + desenho): máx. 60 min por dia (02/11/2026).
+   03/11/2026: tempo GANHO – cada bloco de estudo terminado (cronômetro parado ou fim automático, com trabalho real:
+   pelo menos 60 s e "Feito" não marcado com menos de 60 s) vale GANHO_POR_BLOCO; teto MX por dia. */
+const GANHO_POR_BLOCO=(CFG.ganho_min||8)*60;
+function ganhoTela(){const MX=(CFG.tela_max||60)*60;let n=0;B.forEach((b,k)=>{const i=S.t['i'+k],f=S.t['f'+k];if(!i||!f)return;if((f-i)<60000)return;const fh=(S.fh||{})[k];if(fh&&(fh-i)<60000)return;n++});return {n:n,g:Math.min(MX,n*GANHO_POR_BLOCO)}}
+(function(){const MX=(CFG.tela_max||60)*60,MXT=mmss(MX),MXH=(CFG.tela_max||60)==60?'1 hora':(CFG.tela_max+' minutos'),MXM=(CFG.tela_max||60)+' min';if(CFG.tela_max){const ii=document.querySelector('#tela .inst b+b');if(ii)ii.textContent='no máximo '+MXH+' hoje';}let ult=Date.now();const go=document.getElementById('telaGo'),tx=document.getElementById('telaTxt');
+function jogando(){return [...document.querySelectorAll('.jogo')].some(j=>j.innerHTML.trim())}
+function limite(){return (S.tl||0)>=MX}
+function disp(){return Math.max(0,ganhoTela().g-(S.tl||0))}
+function semTempo(){return limite()||disp()<=0}
+function pinta(){const u=Math.min(MX,Math.floor(S.tl||0)),G=ganhoTela().g,dv=Math.floor(disp());
+tx.textContent=limite()?'⛔ Acabou o tempo de jogo e desenho de hoje ('+MXH+'). Amanhã tem mais!':'Você ganhou '+mmss(G)+' · usou '+mmss(u)+' · disponível '+mmss(dv)+' (máx. '+MXM+')'+(S.tlOn?' · ⏱ contando':'')+(dv<=0?'\nTermine uma atividade para ganhar tempo de jogo':'');
+tx.style.whiteSpace='pre-line';
+go.disabled=semTempo();go.textContent=S.tlOn?'■ Parar tempo livre':(semTempo()&&!limite()?'🔒 Termine uma atividade para ganhar tempo de jogo':'▶ Começar tempo livre (jogo/desenho)');
+document.querySelectorAll('.jg').forEach(b=>{if(b._lab==null)b._lab=b.textContent;b.disabled=semTempo();b.textContent=limite()?'⛔ Jogo de hoje acabou ('+MXH+')':(semTempo()?'🔒 Termine uma atividade para ganhar tempo de jogo':b._lab)})}
+go.onclick=()=>{if(!S.tlOn&&semTempo())return;S.tlOn=S.tlOn?0:1;sv();pinta()};
+setInterval(()=>{const n=Date.now(),dt=Math.min(2,(n-ult)/1000);ult=n;if(!semTempo()&&(S.tlOn||jogando())){S.tl=(S.tl||0)+dt;if(limite()){S.tl=MX;S.tlOn=0;document.querySelectorAll('.card').forEach(d=>{if(d.querySelector('.jogo'))fecha(d)});if(!S.tlAv){S.tlAv=1;try{fala('Acabou o tempo de jogo e desenho de hoje.')}catch(e){}alert('Acabou o tempo de jogo e desenho de hoje ('+MXH+'). Pode desligar o jogo e o desenho.')}}else if(disp()<=0){S.tlOn=0;document.querySelectorAll('.card').forEach(d=>{if(d.querySelector('.jogo'))fecha(d)});try{fala('Acabou o tempo de jogo que você ganhou. Termine uma atividade para ganhar mais.')}catch(e){}alert('Acabou o tempo de jogo que você ganhou. Termine uma atividade para ganhar mais 8 minutos.')}sv()}pinta()},1000);
+document.addEventListener('visibilitychange',()=>{ult=Date.now()});pinta()})();
+</script>
+<script>
+(function(){if(!CFG.missao_meta_seg)return;const META=CFG.missao_meta_seg,FEITO=CFG.missao_feito_seg||0;
+function est(){let s=0;B.forEach((b,k)=>{if(b.op)return;const i=S.t['i'+k];if(!i)return;const e=S.t['f'+k]||Date.now();s+=Math.max(0,Math.min(1500,Math.floor((e-i)/1000)))});return s}
+function hm(x){x=Math.max(0,Math.round(x/60));return Math.floor(x/60)+'h'+String(x%60).padStart(2,'0')}
+function pinta(){const tot=FEITO+est(),pc=Math.min(100,tot/META*100),ok=tot>=META;
+document.getElementById('mBar').style.width=pc.toFixed(1)+'%';
+document.getElementById('mTxt').textContent=ok?'4 horas completas!':'Já fez '+hm(tot)+' de 4h00 · faltam '+hm(META-tot);
+const m=document.getElementById('mOk');if(ok){m.style.display='block';if(!S.missao){S.missao=1;sv();try{fala('Missão cumprida!')}catch(e){}}}}
+setInterval(pinta,1000);pinta();
+RESX.push(function(H,KV){const tot=FEITO+est();H.push('MISSÃO DAS 4 HORAS: '+hm(tot)+' de 4h00 (manhã fixada '+mmss(FEITO)+')'+(tot>=META?' – cumprida':''));KV.push('MISSAO='+(tot>=META?'cumprida':'em andamento')+'|SEG='+tot+'|MANHA='+FEITO)});
+})();
+</script>
+<style>[data-jf]>*:not(h2):not(.jfx):not(.corr){display:none!important}[data-jf]{background:#e8f5e9!important;border-color:#4caf50!important;opacity:.85}.jfx{font-size:24px;font-weight:bold;color:#2e7d32;text-align:center;margin:8px 0}</style>
+<script>/* Já feito ✓ (03/11) */(function(){const C=window.CFG||{};String(C.ja_feito||'').split(',').filter(x=>x!=='').forEach(k=>{const d=document.getElementById('b'+k);if(!d)return;d.dataset.jf=1;const x=document.createElement('p');x.className='jfx';x.textContent='✅ Já feito ✓ — não precisa repetir. Siga para o próximo bloco.';d.appendChild(x)});try{upd()}catch(e){}})();</script>
+<style>.corr{background:#fffde7;border:3px dashed #8d6e63;border-radius:14px;padding:10px;margin:12px 0}.corr h3{margin:4px 0;font-size:20px;color:#5d4037}.corr .cw{border-top:1px solid #d7ccc8;padding:8px 0}.corr label{font-size:19px;font-weight:bold}.corr input[type=checkbox]{width:26px;height:26px;vertical-align:middle}.corr input[type=text]{font-size:19px;width:60%;padding:6px;margin:4px 0}.corr .cbt{font-size:17px;padding:6px 10px;width:auto;display:inline-block}.corr .cok{font-size:20px;font-weight:bold;color:#2e7d32}[data-jf]>.corr{display:block!important}</style>
+<script>/* Correções (03/11, permanente): para cada palavra/resposta escrita do bloco (window.CW, gerado pelo make_aula), o pai digita como ela escreveu da 1ª vez, toca Corrigir (ela vê a certa e conserta no papel) e marca "Corrigida (pai marca)" só se ela consertou. Desmarcado = não consertou. CFG.corrigidas = "k:palavra/1ª vez,...#k:..." pré-preenche (k base 0). Chave nova: K+'-corr'. */
+(function(){const CW=window.CW||{},C=window.CFG||{},KC=K+'-corr',R=JSON.parse(localStorage.getItem(KC)||'{}'),svc=()=>localStorage.setItem(KC,JSON.stringify(R)),nz=s=>String(s).toLowerCase().replace(/[.!?,]/g,'').trim();
+const CAT=['Acertou de primeira, sem ajuda','Errou e corrigiu com ajuda','Errou — explicar o conceito de novo','Acertou com auxílio — explicar de novo'];const PRE={};String(C.corrigidas||'').split('#').filter(x=>x.includes(':')).forEach(x=>{const i=x.indexOf(':'),k=x.slice(0,i).trim();x.slice(i+1).split(',').forEach(p=>{const [w,e]=p.split('/');if(w)PRE[k+'|'+nz(w)]=(e||'').trim()})});
+Object.keys(CW).forEach(k=>{const d=document.getElementById('b'+k);if(!d)return;const W=[...new Set(CW[k])];
+ const box=document.createElement('div');box.className='corr';box.innerHTML='<h3>✏️ Correções (Pai marca)</h3><p style="margin:2px 0;font-size:17px">Pai: digite como ela escreveu da 1ª vez e toque Corrigir. Ela vê a palavra certa e conserta no papel. Marque “Corrigida” só se ela consertou. Em cada item, marque também 1 dos 4 resultados. Deixe em branco a 1ª vez do que ela acertou.</p>';
+ W.forEach((w,j)=>{const id=k+'|'+w;if(!R[id]){R[id]={c:false,e:PRE[k+'|'+nz(w)]||''}}const r=document.createElement('div');r.className='cw';
+  r.innerHTML='<span style="font-size:18px">'+(j+1)+'. Como escreveu da 1ª vez:</span><br><input type="text" id="corr'+k+'e'+j+'"> <button type="button" class="bn cbt">Corrigir</button> <span class="cok"></span><br><label><input type="checkbox" id="corr'+k+'c'+j+'"> Corrigida (pai marca)</label><div class="crad">'+CAT.map((t,c)=>'<label style="display:block;font-weight:normal;font-size:17px"><input type="radio" name="corr'+k+'r'+j+'" value="'+(c+1)+'"> '+(c+1)+'. '+t+'</label>').join('')+'</div>';
+  const cb=r.querySelector('input[type=checkbox]'),tx=r.querySelector('input[type=text]'),ok=r.querySelector('.cok');cb.checked=!!R[id].c;tx.value=R[id].e;
+  const mostra=()=>{ok.textContent=R[id].e?(nz(R[id].e)==nz(w)?'✔ certo: '+w:'Certo: '+w):''};if(R[id].e&&R[id].v)mostra();
+  r.querySelector('.cbt').onclick=()=>{R[id].v=1;svc();mostra();try{if(R[id].e&&nz(R[id].e)!=nz(w))fala('O certo é '+w+'. Conserte no papel.')}catch(e){}};
+  cb.onchange=()=>{R[id].c=cb.checked;svc()};r.querySelectorAll('input[type=radio]').forEach(x=>{x.checked=R[id].cat==x.value;x.onchange=()=>{R[id].cat=x.value;svc()}});tx.oninput=()=>{R[id].e=tx.value;svc()};box.appendChild(r)});svc();
+ const pg=d.querySelector(':scope>.perg')||d.querySelector(':scope>.feitob');if(d.dataset.jf||!pg)d.appendChild(box);else pg.before(box);
+ (window.RESX=window.RESX||[]).push(function(H,KV){const L=W.filter(w=>(R[k+'|'+w].e||'').trim()&&nz(R[k+'|'+w].e)!=nz(w)).map(w=>{const x=R[k+'|'+w];return w.replace(/[|:]/g,' ')+':'+x.e.replace(/[|:]/g,' ')+':'+(x.c?'sim':'nao')});
+  KV.push('ITENS=pai|BLOCO='+(+k+1)+'|'+W.map(w=>{const x=R[k+'|'+w];return w.replace(/[|:]/g,' ')+':'+(x.cat?'cat'+x.cat:'-')+':'+(x.e||'').replace(/[|:]/g,' ')+':'+(x.c?'sim':'nao')}).join('|'));if(W.some(w=>R[k+'|'+w].cat))H.push('Bloco '+(+k+1)+' – itens (pai): '+W.map(w=>w+'='+(R[k+'|'+w].cat||'-')).join(', '));KV.push('CORRIGIDAS=pai|BLOCO='+(+k+1)+'|'+(L.join('|')||'nenhuma'));if(L.length)H.push('Bloco '+(+k+1)+' – correções: '+L.map(x=>{const [w,e,c]=x.split(':');return w+' (1ª vez "'+e+'") '+(c=='sim'?'→ corrigida ✓':'→ não corrigida')}).join('; '))})})})();</script>
+</body></html>
