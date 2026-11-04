@@ -183,7 +183,7 @@ KV.push('PAUSAS='+mmss(gu)+'|USADO='+mmss(us)+'|SOBROU='+mmss(S.bank||0));H.push
 const PK=B.flatMap(b=>b.pk||[]),cnt=kd=>{const a=PK.filter(p=>p.kid==kd);return a.filter(p=>C[p.c]).length+'/'+a.length};
 KV.push('PEQUENA=registro|LETRAS=|NOME=|LIVRO=|MIN=|FEITAS='+cnt('pequena')+'|OBS=|FOTOS=0');KV.push('PEQUENO=registro|ESTIM='+(()=>{const a=PK.filter(p=>p.kid=='pequeno'),d=a.filter(p=>C[p.c]).length;return !a.length?'':d==a.length?'Sim':d?'Parcial':'Não'})()+'|FEITAS='+cnt('pequeno')+'|OBS=');
 Object.entries(S.jogo||{}).forEach(([g,j])=>{KV.push('JOGO='+g+'|VEZES='+(j.vezes||0)+'|ESTRELAS='+(j.estrelas||'')+'|OPINIAO='+(j.op||''));H.push('Jogo da pausa ('+g+'): jogou '+(j.vezes||0)+' vez(es)'+(j.op?', opinião: '+j.op:''))});
-KV.push('GLORIA='+cl(X.gloria));KV.push('NOTA='+cl(X.nota));
+KV.push('GLORIA='+cl(X.gloria));KV.push('NOTA='+cl(X.nota));{const ac=Object.keys(S.c||{}).filter(x=>/^am_/.test(x)).sort();if(ac.length||(S.f||{}).am_nota){KV.push('APRESENTACAO=MARCADOS='+(ac.filter(x=>S.c[x]).join(',')||'nenhum')+'|NOTA='+cl((S.f||{}).am_nota||''));H.push('Apresentação: marcados '+(ac.filter(x=>S.c[x]).join(', ')||'nenhum')+'; nota do papai: '+((S.f||{}).am_nota||'-'))}}
 (window.RESX||[]).forEach(f=>{try{f(H,KV)}catch(e){}});window.KVALL=KV;const body=H.join('\n')+'\n\n'+KV.join('\n')+'\n';document.getElementById('rtxt').textContent=body;
 document.getElementById('env').onclick=()=>location.href='mailto:abnergonzales64@gmail.com?subject='+encodeURIComponent('Resultado estudos '+d)+'&body='+encodeURIComponent(body);
 document.getElementById('cop').onclick=async()=>{try{await navigator.clipboard.writeText(body);alert('Resumo copiado.')}catch(e){prompt('Copie:',body)}};return body}
