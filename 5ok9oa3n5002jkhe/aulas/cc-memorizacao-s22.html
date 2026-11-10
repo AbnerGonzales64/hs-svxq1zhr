@@ -9,4 +9,32 @@ button{font-size:20px;padding:10px 14px;border-radius:12px;border:3px solid #7b1
 .cx label{display:flex;align-items:center;gap:6px;font-size:18px;font-weight:bold;padding:8px 10px;background:#fffde7;border:3px solid #ffb300;border-radius:12px;margin:0}
 .cx input{transform:scale(1.6)}
 details.lt{margin:6px 0;background:#f3f3f3;border-radius:10px;padding:6px 10px;font-size:18px}details.lt pre{white-space:pre-wrap;font-family:inherit;margin:6px 0}
-#fim{text-align:center;font-size:24px;font-weight:bold;color:#2e7d32}.hide{display:none}</style><body><h1>📚 Memorização do CC – Semana 22</h1><div class="aviso">As músicas e áudios da Semana 22 ainda não chegaram. Quando o papai mandar, cada música aparece aqui com o áudio e <b>7 caixinhas</b> (1/7 … 7/7) para marcar cada vez que cantar. Nada inventado — seção pronta, esperando o material.</div><p style="text-align:center">Regra desta semana (09–13/11): memorização <b>só</b> da Semana 22; cada música 7 vezes.</p><p id="pr" class="hide"></p><div id="lista"></div><p id="fim" class="hide"></p></body></html>
+#fim{text-align:center;font-size:24px;font-weight:bold;color:#2e7d32}.hide{display:none}</style><body><h1>📚 Memorização do CC – Semana 22</h1><p class="pr" id="pr"></p><p style="text-align:center">Só as músicas da Semana 22. Cante cada uma <b>7 vezes</b> e marque as caixinhas.</p><div id="lista"></div><p id="fim" class="hide">Muito bem! Semana 22 memorizada (7/7 em cada). Glória a Deus! 🙌</p><script>(function(){var M=[{"id": "s22-matematica", "m": "Matemática", "s": 22, "sem": "Semana 22", "t": "Propriedade Comutativa", "a": "../audio/cc-s22-matematica.mp3", "l": "(fonte: cartão Semana 22 do Drive / plano 29/10; título confirmado no vídeo do app 09/11 — não é transcrição do áudio)\nPropriedade Comutativa da Adição\na + b = b + a\nPropriedade Comutativa da Multiplicação\na × b = b × a"}, {"id": "s22-latim", "m": "Latim", "s": 22, "sem": "Semana 22", "t": "1ª Conjugação Pretérito Mais-Que-Perfeito", "a": "../audio/cc-s22-latim.mp3", "l": "Terminação do pretérito mais-que-perfeito do indicativo na 1ª conjugação\nSingular: eram, erās, erat\nPlural: erāmus, erātis, erant"}, {"id": "s22-ciencias", "m": "Ciências", "s": 22, "sem": "Semana 22", "t": "As principais maneiras da luz ser observada", "a": "../audio/cc-s22-ciencias.mp3", "l": "Quais são as principais maneiras de a luz ser observada?\nReflexão\nRefração\nEspectro\nOnda\nPartícula"}, {"id": "s22-portugues", "m": "Português", "s": 22, "sem": "Semana 22", "t": "Numeral", "a": "../audio/cc-s22-portugues.mp3", "l": "Numeral\nNumeral é a palavra que indica quantidade de pessoas ou coisas, bem como a ordenação de elementos numa série, podem variar em gênero e número."}, {"id": "s22-linha-do-tempo", "m": "Linha do Tempo", "s": 22, "sem": "Semana 22", "t": "Organização do Tratado do Atlântico Norte…", "a": "../audio/cc-s22-linha-do-tempo.mp3", "l": "(transcrita do vídeo/áudio, conferir — confiança baixa: só o título na tela do app; STT whisper tiny/base e vosk não recuperaram o canto com fidelidade)\nOrganização do Tratado do Atlântico Norte…\n[inaudível]"}, {"id": "s22-historia", "m": "História", "s": 22, "sem": "Semana 22", "t": "Queda do Comunismo", "a": "../audio/cc-s22-historia.mp3", "l": "Conte-me sobre a queda do Comunismo.\nEm 1989, os ditadores comunistas começaram a cair na Europa Oriental quando o Secretário-Geral soviético Gorbachev recusou-se a enviar-lhes ajuda militar."}, {"id": "s22-geografia", "m": "Geografia", "s": 22, "sem": "Semana 22", "t": "Oceania", "a": "../audio/cc-s22-geografia.mp3", "l": "Oceania\nAustrália\nGrande Barreira de Coral\nNova Zelândia\nPapua Nova Guiné\nIndonésia"}];var d=new Date(),p=function(n){return("0"+n).slice(-2)};
+var K="ccmem"+22+"-"+d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+"-",L=localStorage;
+function g(k){return L.getItem(K+k)}function s(k,v){L.setItem(K+k,v)}
+var box=document.getElementById("lista"),atual=null;
+M.forEach(function(x,i){var c=document.createElement("div");c.className="m";c.id="m"+i;
+ var boxes="";for(var j=1;j<=7;j++)boxes+='<label><input type="checkbox" class="ck" data-n="'+j+'"> '+j+'/7</label>';
+ c.innerHTML='<h2>🎵 '+(i+1)+'/'+M.length+' · '+x.m+', '+x.sem+'</h2>'+(x.t?'<p class="tema">Tema: <b>'+x.t+'</b></p>':'')+
+ '<p style="text-align:center;font-weight:bold">Cante 7 vezes (marque cada vez)</p>'+
+ '<button type="button" class="tc">▶ Tocar a música</button>'+
+ '<div class="cx">'+boxes+'</div>'+
+ '<p class="cont" style="text-align:center;font-weight:bold">0/7</p>'+
+ '<details class="lt"><summary>📖 Letra (papai)</summary>'+(x.l?'<pre>'+x.l+'</pre>':'<p><i>letra não registrada</i></p>')+'</details>';
+ box.appendChild(c);var a=new Audio();a.preload="none";a.src=x.a;var estado="i";
+ var tc=c.querySelector(".tc");
+ var rot=function(){tc.textContent=estado=="t"?"⏸ Pausar a música":estado=="p"?"▶ Continuar a música":estado=="f"?"🔁 Tocar de novo":"▶ Tocar a música"};
+ tc.onclick=function(){if(estado=="t"){a.pause();estado="p";rot();return}
+  if(atual&&atual!==a){try{atual.pause()}catch(e){}}atual=a;
+  if(estado=="f"||estado=="i")a.currentTime=0;estado="t";rot();a.play().catch(function(){estado="f";rot()})};
+ a.onended=function(){estado="f";rot()};a.onerror=function(){estado="f";rot()};
+ function sync(){var n=0,cks=c.querySelectorAll(".ck");[].forEach.call(cks,function(k){if(k.checked)n++});
+  c.querySelector(".cont").textContent=n+"/7";c.classList.toggle("ok",n>=7);s("d"+x.id,n>=7?"1":String(n));upd()}
+ [].forEach.call(c.querySelectorAll(".ck"),function(k){var n=k.getAttribute("data-n");
+  var saved=parseInt(g("d"+x.id)||"0",10);if(saved>=parseInt(n,10)||g("d"+x.id)=="1")k.checked=true;
+  k.onchange=sync});sync()});
+function upd(){var n=0;M.forEach(function(x,i){if(g("d"+x.id)=="1")n++});
+ document.getElementById("pr").textContent="Memorização Semana 22: "+n+"/"+M.length+" músicas com 7/7 ✔";
+ var F=document.getElementById("fim");F.classList.toggle("hide",n<M.length);
+ if(n==M.length&&M.length){s("env","1");var mo=M.length+" músicas da Semana 22: todas 7/7";[0,1500].forEach(function(t){setTimeout(function(){try{parent.postMessage({ccfeito:"memorizacao",motivo:mo},"*")}catch(e){}},t)})}}
+upd()})();</script></body></html>
